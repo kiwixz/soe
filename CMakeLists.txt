@@ -53,5 +53,5 @@ add_test(NAME "check_clang_tidy"
 add_subdirectory("utils")
 add_subdirectory("config")
 
-#add_subdirectory("libsoe")
+add_subdirectory("libsoe")
 add_subdirectory("soe")
