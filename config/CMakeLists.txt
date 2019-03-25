@@ -20,8 +20,3 @@ target_link_libraries("${target}"
 
     "fmt::fmt"
 )
-
-if (UNIX)
-    find_package("Threads" REQUIRED)
-    target_link_libraries("${target}" "Threads::Threads" "stdc++fs")
-endif ()

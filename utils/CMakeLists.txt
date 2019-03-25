@@ -11,9 +11,3 @@ target_include_directories("${target}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/inclu
 
 file(GLOB_RECURSE test_src "*.test.cpp")
 test_cpp_target("${target}" "${test_src}")
-
-
-if (UNIX)
-    find_package("Threads" REQUIRED)
-    target_link_libraries("${target}" "Threads::Threads" "stdc++fs")
-endif ()

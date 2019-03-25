@@ -16,8 +16,3 @@ test_cpp_target("${target}" "${test_src}")
 target_link_libraries("${target}"
     "utils"
 )
-
-if (UNIX)
-    find_package("Threads" REQUIRED)
-    target_link_libraries("${target}" "Threads::Threads" "stdc++fs")
-endif ()

@@ -26,8 +26,3 @@ target_link_libraries("${target}_base"
     "fmt::fmt"
     "spdlog::spdlog"
 )
-
-if (UNIX)
-    find_package("Threads" REQUIRED)
-    target_link_libraries("${target}" "Threads::Threads" "stdc++fs")
-endif ()
