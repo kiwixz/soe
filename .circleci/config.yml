@@ -1,0 +1,92 @@
+version: 2.1
+
+jobs:
+  "build":
+    docker:
+      - image: kiwixz/ci-cpp:2019-03-24
+    environment:
+      CMAKE_BUILD_PARALLEL_LEVEL: 4
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore vcpkg cache
+          keys:
+            - vcpkg-0-{{ .Branch }}-{{ .Revision }}
+            - vcpkg-0-{{ .Branch }}-
+            - vcpkg-0-
+      - run:
+          name: Install vcpkg dependencies
+          command: |
+            ln -s "/opt/vcpkg"
+            ./install_libs.py
+      - save_cache:
+          name: Save vcpkg cache
+          key: vcpkg-0-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - /opt/vcpkg
+      - run:
+          name: Dump versions
+          command: |
+            pacman --color=always -Q
+            vcpkg list
+      - run:
+          name: Test debug
+          environment:
+            CXXFLAGS: -fdiagnostics-color=always -Werror
+            LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
+            ASAN_OPTIONS: check_initialization_order=1
+            UBSAN_OPTIONS: print_stacktrace=1
+          command: |
+            mkdir -p "build/debug"
+            cd "build/debug"
+            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Debug" "../.."
+            ninja
+            ctest --output-on-failure -E "check_.*"
+      - run:
+          name: Test release
+          environment:
+            CXXFLAGS: -fdiagnostics-color=always -Werror
+            LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
+          command: |
+            mkdir -p "build/release"
+            cd "build/release"
+            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Release" "../.."
+            ninja
+            ctest --output-on-failure -E "check_.*"
+      - run:
+          name: Additional checks
+          command: |
+            cd "build/debug"
+            ctest --output-on-failure -R "check_.*"
+  "doc":
+    docker:
+      - image: kiwixz/ci-doc:2019-03-24
+    steps:
+      - add_ssh_keys
+      - checkout
+      - run:
+          name: Generate documentation
+          command: |
+            mkdir "build"
+            doxygen
+      - deploy:
+          name: Publish documentation
+          command: |
+            git clone -b "gh-pages" --depth 1 "$CIRCLE_REPOSITORY_URL" "build/gh-pages"
+            mkdir -p "build/gh-pages/doc"
+            rm -rf "build/gh-pages/doc/$CIRCLE_BRANCH"
+            mv "build/doc/html" "build/gh-pages/doc/$CIRCLE_BRANCH"
+            git -C "build/gh-pages" add -A
+            git -C "build/gh-pages" -c "user.name=ci" -c "user.email=ci" commit  \
+                -m "[ci] update 'doc/$CIRCLE_BRANCH' commit $CIRCLE_SHA1"
+            git -C "build/gh-pages" push
+
+workflows:
+  version: 2
+  all:
+    jobs:
+      - "build"
+      - "doc":
+          filters:
+            branches:
+              only: master

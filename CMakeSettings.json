@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "configurationType": "Debug",
+      "generator": "Ninja",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}/build/${name}",
+      "variables": [
+        {
+          "name": "CMAKE_CXX_FLAGS",
+          "value": ""
+        }
+      ],
+      "ctestCommandArgs": "--output-on-failure -E check_clang_tidy"
+    },
+    {
+      "name": "x64-Release",
+      "configurationType": "Release",
+      "generator": "Ninja",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}/build/${name}",
+      "variables": [
+        {
+          "name": "CMAKE_CXX_FLAGS",
+          "value": ""
+        }
+      ],
+      "ctestCommandArgs": "--output-on-failure -E check_clang_tidy"
+    }
+  ]
+}
