@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  "nothing":
+    docker:
+      - image: alpine
+    steps:
+      - run:
+          name: Do nothing
+          command: ":"
+
+workflows:
+  version: 2
+  nothing:
+    jobs:
+      - "nothing":
+          filters:
+            branches:
+              only: none
