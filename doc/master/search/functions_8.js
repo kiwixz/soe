@@ -7,5 +7,6 @@ var searchData=
   ['sharedhandle',['SharedHandle',['../structutils_1_1_shared_handle.html#a4ed09382cf5fee23a1f69009212683fb',1,'utils::SharedHandle']]],
   ['show_5fhelp',['show_help',['../structconfig_1_1_config.html#a3087984b7a3fc8346dcf392ee82dded6',1,'config::Config']]],
   ['size',['size',['../structutils_1_1_thread_pool.html#a297cc6df40cd2f62d6e16e48ebae3b83',1,'utils::ThreadPool']]],
+  ['static_5funique_5fptr_5fcast',['static_unique_ptr_cast',['../namespaceutils.html#a754cac7672598c03d3426239ffa9f1ed',1,'utils']]],
   ['submit',['submit',['../structutils_1_1_thread_pool.html#a6dc05ce6a612b778a5140c08b8f3632d',1,'utils::ThreadPool']]]
 ];

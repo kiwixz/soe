@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Leitse: utils/paths.cpp File Reference</title>
+<title>Leitse: utils/include/utils/unique_ptr_cast.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_cbdb8362360e11eafe2fa3bc74cf0ffd.html">utils</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_cbdb8362360e11eafe2fa3bc74cf0ffd.html">utils</a></li><li class="navelem"><a class="el" href="dir_b4cad7074c2c537630e3aa48c3ef8dec.html">include</a></li><li class="navelem"><a class="el" href="dir_66dd9db28804934c989a12dd275ef9b6.html">utils</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -69,23 +69,18 @@ $(function() {
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">paths.cpp File Reference</div>  </div>
+<div class="title">unique_ptr_cast.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="paths_8h_source.html">utils/paths.h</a>&quot;</code><br />
-<code>#include &lt;<a class="el" href="scope__exit_8h_source.html">utils/scope_exit.h</a>&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;pwd.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for paths.cpp:</div>
+Include dependency graph for unique_ptr_cast.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="paths_8cpp__incl.svg" width="950" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="unique__ptr__cast_8h__incl.svg" width="223" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
-<p><a href="paths_8cpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="unique__ptr__cast_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -94,8 +89,13 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a5064b3980eb7aa98e3daf3bb12b3c3d8"><td class="memItemLeft" align="right" valign="top">std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a5064b3980eb7aa98e3daf3bb12b3c3d8">utils::get_kiwixz_home</a> (std::string_view app_name)</td></tr>
-<tr class="separator:a5064b3980eb7aa98e3daf3bb12b3c3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a754cac7672598c03d3426239ffa9f1ed"><td class="memTemplParams" colspan="2">template&lt;typename Derived , typename Base &gt; </td></tr>
+<tr class="memitem:a754cac7672598c03d3426239ffa9f1ed"><td class="memTemplItemLeft" align="right" valign="top">std::unique_ptr&lt; Derived &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a754cac7672598c03d3426239ffa9f1ed">utils::static_unique_ptr_cast</a> (std::unique_ptr&lt; Base &gt; &amp;&amp;ptr)</td></tr>
+<tr class="separator:a754cac7672598c03d3426239ffa9f1ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6021f9488a92d88f057a78f2fd2b757c"><td class="memTemplParams" colspan="2">template&lt;typename Derived , typename Base &gt; </td></tr>
+<tr class="memitem:a6021f9488a92d88f057a78f2fd2b757c"><td class="memTemplItemLeft" align="right" valign="top">std::unique_ptr&lt; Derived &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a6021f9488a92d88f057a78f2fd2b757c">utils::dynamic_unique_ptr_cast</a> (std::unique_ptr&lt; Base &gt; &amp;&amp;ptr)</td></tr>
+<tr class="memdesc:a6021f9488a92d88f057a78f2fd2b757c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Will not alter base pointer on conversion failure (returning null).  <a href="namespaceutils.html#a6021f9488a92d88f057a78f2fd2b757c">More...</a><br /></td></tr>
+<tr class="separator:a6021f9488a92d88f057a78f2fd2b757c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
