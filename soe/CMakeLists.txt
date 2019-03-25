@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
+include("${CMAKE_SOURCE_DIR}/cmake/test_target.cmake")
 
 set(target "soe")
 
@@ -10,13 +11,8 @@ add_library("${target}_base" "${src}")
 add_executable("${target}" "main.cpp")
 target_link_libraries("${target}" "${target}_base")
 
-if (BUILD_TESTS)
-    file(GLOB_RECURSE test_src "*.test.cpp")
-    add_executable("${target}_test" "${test_src}")
-    find_package("doctest" CONFIG REQUIRED)
-    target_link_libraries("${target}_test" "${target}_base" "doctest::doctest")
-    add_test(NAME "${target}_test" COMMAND "${target}_test")
-endif ()
+file(GLOB_RECURSE test_src "*.test.cpp")
+test_cpp_target("${target}_base" "${test_src}")
 
 
 find_package("fmt" CONFIG REQUIRED)
