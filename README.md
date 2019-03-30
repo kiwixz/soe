@@ -8,6 +8,5 @@
 Perform motion interpolation on videos.  First, the goal is to implement it with CPU code for offline processing (similar to ffmpeg's `-vf minterpolate`).  Eventually, realtime processing using GPU will be implemented (probably with CUDA) and integrated to VLC via a module.
 
 
-## License
 
-Licensed under the [MIT License](LICENSE)
+_Licensed under the [MIT License](LICENSE)._
