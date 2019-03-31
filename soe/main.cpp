@@ -1,3 +1,4 @@
+#include <opencv2/core/mat.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <filesystem>
@@ -10,6 +11,8 @@ void main_impl(int argc, char** argv)
 {
     (void)argc;
     (void)argv;
+
+    cv::Mat img;
 }
 
 int main(int argc, char** argv)

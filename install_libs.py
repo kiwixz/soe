@@ -14,6 +14,7 @@ VCPKG_COMMIT = "eafe9ebcdf191ad0fff98c0f060000edb208318d"
 VCPKG_LIBS = [
     "doctest",
     "fmt",
+    "opencv",
     "spdlog",
 ]
 

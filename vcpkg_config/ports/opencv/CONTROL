@@ -1,0 +1,3 @@
+Source: opencv
+Build-Depends: zlib
+Version: custom-0
