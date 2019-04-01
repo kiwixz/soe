@@ -29,6 +29,7 @@ vcpkg_configure_cmake(
         -DBUILD_opencv_apps=OFF
         -DBUILD_PERF_TESTS=OFF
         -DBUILD_TESTS=OFF
+        -DWITH_IPP=ON  # force it so debug has same number of libs
 
         # provided by vcpkg
         -DBUILD_JASPER=OFF
@@ -89,3 +90,9 @@ else ()
 endif ()
 
 configure_file(${SOURCE_PATH}/LICENSE ${CURRENT_PACKAGES_DIR}/share/opencv/copyright COPYONLY)
+
+if (WIN32)
+    # lie to allow ffmpeg dlls
+    set(VCPKG_LIBRARY_LINKAGE dynamic)
+    set(VCPKG_POLICY_ALLOW_OBSOLETE_MSVCRT enabled)
+endif ()
