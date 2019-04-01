@@ -16,7 +16,7 @@ test_cpp_target("${target}_base" "${test_src}")
 
 
 find_package("fmt" CONFIG REQUIRED)
-find_package("OpenCV" CONFIG REQUIRED)
+find_package("OpenCV" CONFIG REQUIRED "videoio")
 find_package("spdlog" CONFIG REQUIRED)
 
 target_link_libraries("${target}_base"
