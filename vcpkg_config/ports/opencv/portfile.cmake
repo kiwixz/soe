@@ -10,6 +10,7 @@ vcpkg_from_github(
     HEAD_REF master
     PATCHES
         "${CMAKE_CURRENT_LIST_DIR}/0001-fix-paths.patch"
+        "${CMAKE_CURRENT_LIST_DIR}/0002-fix-paths-linux.patch"
 )
 
 vcpkg_configure_cmake(
@@ -42,30 +43,50 @@ vcpkg_configure_cmake(
 )
 
 vcpkg_install_cmake()
-vcpkg_fixup_cmake_targets(CONFIG_PATH staticlib)
 
-file(REMOVE_RECURSE
-    ${CURRENT_PACKAGES_DIR}/debug/include
-    ${CURRENT_PACKAGES_DIR}/debug/share
-    ${CURRENT_PACKAGES_DIR}/etc
-    ${CURRENT_PACKAGES_DIR}/debug/etc
-)
-file(REMOVE
-    ${CURRENT_PACKAGES_DIR}/LICENSE
-    ${CURRENT_PACKAGES_DIR}/debug/LICENSE
-    ${CURRENT_PACKAGES_DIR}/setup_vars_opencv4.cmd
-    ${CURRENT_PACKAGES_DIR}/debug/setup_vars_opencv4.cmd
-    ${CURRENT_PACKAGES_DIR}/OpenCVConfig.cmake
-    ${CURRENT_PACKAGES_DIR}/debug/OpenCVConfig.cmake
-    ${CURRENT_PACKAGES_DIR}/OpenCVConfig-version.cmake
-    ${CURRENT_PACKAGES_DIR}/debug/OpenCVConfig-version.cmake
-)
+if (WIN32)
+    vcpkg_fixup_cmake_targets(CONFIG_PATH staticlib)
 
-file(READ ${CURRENT_PACKAGES_DIR}/share/opencv/OpenCVConfig.cmake OPENCV_CONFIG)
-string(REPLACE
-    "\${OpenCV_CONFIG_PATH}/../"
-    "\${_VCPKG_INSTALLED_DIR}/\${VCPKG_TARGET_TRIPLET}/"
-    OPENCV_CONFIG "${OPENCV_CONFIG}")
-file(WRITE ${CURRENT_PACKAGES_DIR}/share/opencv/OpenCVConfig.cmake "${OPENCV_CONFIG}")
+    file(REMOVE_RECURSE
+        ${CURRENT_PACKAGES_DIR}/debug/include
+        ${CURRENT_PACKAGES_DIR}/debug/share
+        ${CURRENT_PACKAGES_DIR}/etc
+        ${CURRENT_PACKAGES_DIR}/debug/etc
+    )
+    file(REMOVE
+        ${CURRENT_PACKAGES_DIR}/LICENSE
+        ${CURRENT_PACKAGES_DIR}/debug/LICENSE
+        ${CURRENT_PACKAGES_DIR}/setup_vars_opencv4.cmd
+        ${CURRENT_PACKAGES_DIR}/debug/setup_vars_opencv4.cmd
+        ${CURRENT_PACKAGES_DIR}/OpenCVConfig.cmake
+        ${CURRENT_PACKAGES_DIR}/debug/OpenCVConfig.cmake
+        ${CURRENT_PACKAGES_DIR}/OpenCVConfig-version.cmake
+        ${CURRENT_PACKAGES_DIR}/debug/OpenCVConfig-version.cmake
+    )
+
+    file(READ ${CURRENT_PACKAGES_DIR}/share/opencv/OpenCVConfig.cmake OPENCV_CONFIG)
+    string(REPLACE
+        "\${OpenCV_CONFIG_PATH}/../"
+        "\${_VCPKG_INSTALLED_DIR}/\${VCPKG_TARGET_TRIPLET}/"
+        OPENCV_CONFIG "${OPENCV_CONFIG}")
+    file(WRITE ${CURRENT_PACKAGES_DIR}/share/opencv/OpenCVConfig.cmake "${OPENCV_CONFIG}")
+else ()
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/share)
+    vcpkg_fixup_cmake_targets(CONFIG_PATH lib/cmake/opencv4)
+
+    file(REMOVE_RECURSE
+        ${CURRENT_PACKAGES_DIR}/debug/include
+        ${CURRENT_PACKAGES_DIR}/debug/share
+        ${CURRENT_PACKAGES_DIR}/bin
+        ${CURRENT_PACKAGES_DIR}/debug/bin
+    )
+
+    file(READ ${CURRENT_PACKAGES_DIR}/share/opencv/OpenCVConfig.cmake OPENCV_CONFIG)
+    string(REPLACE
+        "\${OpenCV_CONFIG_PATH}/../../../"
+        "\${_VCPKG_INSTALLED_DIR}/\${VCPKG_TARGET_TRIPLET}/"
+        OPENCV_CONFIG "${OPENCV_CONFIG}")
+    file(WRITE ${CURRENT_PACKAGES_DIR}/share/opencv/OpenCVConfig.cmake "${OPENCV_CONFIG}")
+endif ()
 
 configure_file(${SOURCE_PATH}/LICENSE ${CURRENT_PACKAGES_DIR}/share/opencv/copyright COPYONLY)
