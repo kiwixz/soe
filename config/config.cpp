@@ -26,7 +26,7 @@ std::string const& Config::get_raw(std::string const& key) const
 void Config::remove(std::string const& key)
 {
     if (options_.erase(key) == 0)
-        throw std::runtime_error{"key not present"};
+        throw std::runtime_error{fmt::format("key '{}' missing", key)};
 }
 
 void Config::clear()
@@ -96,7 +96,7 @@ void Config::parse_file(std::filesystem::path const& path, bool allow_unknown)
 {
     std::ifstream ifs{path, std::ios::ate};
     if (!ifs)
-        throw std::runtime_error{fmt::format("could not open config file '{}'", path)};
+        throw std::runtime_error{fmt::format("could not open config file '{}'", path.generic_string())};
     std::streamoff size = ifs.tellg();
     std::string content(size, '\0');
     ifs.seekg(0, std::ios::beg);
@@ -174,7 +174,7 @@ std::string Config::dump(std::string_view prefix) const
 
 void Config::show_help(std::string_view app_name) const
 {
-    fmt::print("Usage: {} [--help] [+config_file] [-option...] [--] [positional arguments]\n", app_name);
+    fmt::print("Usage: {} [--help] [+config_file] [-option[=value]...] [--] [positional arguments]\n", app_name);
     fmt::print("Options and their default values:\n{}", dump("\t"));
 }
 
