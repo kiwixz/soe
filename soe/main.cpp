@@ -1,4 +1,4 @@
-#include <opencv2/core/mat.hpp>
+#include <opencv2/videoio.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <filesystem>
@@ -12,7 +12,22 @@ void main_impl(int argc, char** argv)
     (void)argc;
     (void)argv;
 
-    cv::Mat img;
+    cv::VideoCapture reader;
+    if (!reader.open(argv[1]))
+        throw std::runtime_error{fmt::format("could not open source video '{}'", argv[1])};
+
+    double out_fps = reader.get(cv::CAP_PROP_FPS);  // may return garbage
+    cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
+                        static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
+
+    cv::VideoWriter writer;
+    if (!writer.open(argv[2], cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), out_fps, frame_size))
+        throw std::runtime_error{fmt::format("could not open destination video '{}'", argv[2])};
+
+    cv::Mat frame;
+    while (reader.read(frame)) {
+        writer.write(frame);
+    }
 }
 
 int main(int argc, char** argv)
