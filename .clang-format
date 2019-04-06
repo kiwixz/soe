@@ -1,8 +1,8 @@
-# clang-format 6.0.0
+# clang-format 8.0.0
 
 ---
 Language: Cpp
-# BasedOnStyle: WebKit
+# BasedOnStyle: LLVM
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
@@ -19,7 +19,7 @@ AllowShortLoopsOnASingleLine: false
 # AlwaysBreakAfterDefinitionReturnType: None  # deprecated
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
-AlwaysBreakTemplateDeclarations: true
+AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: true
 BinPackParameters: true
 BraceWrapping:
@@ -38,12 +38,14 @@ BraceWrapping:
   SplitEmptyFunction: false
   SplitEmptyRecord: false
   SplitEmptyNamespace: false
-# BreakAfterJavaFieldAnnotations: true
+# BreakAfterJavaFieldAnnotations: false
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeBraces: Custom
-BreakBeforeInheritanceComma: false
+BreakBeforeInheritanceComma: false  # removed?
 BreakBeforeTernaryOperators: true
-BreakConstructorInitializers: AfterColon
+BreakConstructorInitializers: AfterColon  # removed?
+BreakConstructorInitializersBeforeComma: false  # removed?
+BreakInheritanceList: AfterColon
 BreakStringLiterals: true
 ColumnLimit: 0
 CommentPragmas: '^$'
@@ -54,7 +56,7 @@ ContinuationIndentWidth: 8
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 DisableFormat: false
-# ExperimentalAutoDetectBinPacking: true  # experimental
+# ExperimentalAutoDetectBinPacking: false  # experimental
 FixNamespaceComments: true
 ForEachMacros: []
 IncludeBlocks: Preserve
@@ -65,18 +67,19 @@ IncludeCategories:
     Priority: 2
   - Regex: '.*'
     Priority: 1
-IncludeIsMainRegex: '$'
+IncludeIsMainRegex: '(\.test)?$'
 IndentCaseLabels: false
 IndentPPDirectives: AfterHash
 IndentWidth: 4
 IndentWrappedFunctionNames: false
-# JavaScriptQuotes: Double
+# JavaScriptQuotes: Leave
 # JavaScriptWrapImports: true
 KeepEmptyLinesAtTheStartOfBlocks: true
 MacroBlockBegin: ''
 MacroBlockEnd: ''
 MaxEmptyLinesToKeep: 2
 NamespaceIndentation: None
+# ObjCBinPackProtocolList: Auto
 # ObjCBlockIndentWidth: 4
 # ObjCSpaceAfterProperty: true
 # ObjCSpaceBeforeProtocolList: true
@@ -85,6 +88,7 @@ PenaltyBreakBeforeFirstCallParameter: 1000
 PenaltyBreakComment: 1000000000
 PenaltyBreakFirstLessLess: 1
 PenaltyBreakString: 100000
+PenaltyBreakTemplateDeclaration: 1
 PenaltyExcessCharacter: 10000000
 PenaltyReturnTypeOnItsOwnLine: 1
 PointerAlignment: Left
@@ -95,7 +99,11 @@ SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
 SpaceAfterTemplateKeyword: true
 SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 2
 SpacesInAngles: false
@@ -104,6 +112,7 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 Standard: Cpp11
+StatementMacros: []
 TabWidth: 4
 UseTab: Never
 ...
