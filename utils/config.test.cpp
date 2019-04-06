@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "utils/config.h"
 #include <doctest/doctest.h>
 #include <array>
 #include <forward_list>

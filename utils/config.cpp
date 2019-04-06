@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "utils/config.h"
 #include <fmt/printf.h>
 #include <utils/paths.h>
 #include <algorithm>

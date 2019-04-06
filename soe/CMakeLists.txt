@@ -20,7 +20,6 @@ find_package("OpenCV" CONFIG REQUIRED "videoio")
 find_package("spdlog" CONFIG REQUIRED)
 
 target_link_libraries("${target}_base"
-    "config"
     "libsoe"
     "utils"
 
