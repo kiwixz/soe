@@ -8,15 +8,15 @@ struct PictureYV12 {
     PictureYV12() = default;
     PictureYV12(int width, int height);
 
-    int width() const;
-    int height() const;
+    [[nodiscard]] int width() const;
+    [[nodiscard]] int height() const;
 
-    uint8_t* y();
-    uint8_t const* y() const;
-    uint8_t* u();
-    uint8_t const* u() const;
-    uint8_t* v();
-    uint8_t const* v() const;
+    [[nodiscard]] uint8_t* y();
+    [[nodiscard]] uint8_t const* y() const;
+    [[nodiscard]] uint8_t* u();
+    [[nodiscard]] uint8_t const* u() const;
+    [[nodiscard]] uint8_t* v();
+    [[nodiscard]] uint8_t const* v() const;
 
 private:
     int width_;

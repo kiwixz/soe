@@ -1,4 +1,4 @@
-# clang-tidy 6.0.0
+# clang-tidy 8.0.0
 
 ---
 Checks: "*  ,\
@@ -7,8 +7,10 @@ Checks: "*  ,\
   \
   -bugprone-integer-division  ,\
   \
+  -cppcoreguidelines-avoid-magic-numbers  ,\
   -cppcoreguidelines-pro-bounds-constant-array-index  ,\
   -cppcoreguidelines-pro-bounds-pointer-arithmetic  ,\
+  -cppcoreguidelines-pro-type-const-cast  ,\
   -cppcoreguidelines-pro-type-member-init  ,\
   -cppcoreguidelines-pro-type-reinterpret-cast  ,\
   -cppcoreguidelines-pro-type-static-cast-downcast  ,\
@@ -32,6 +34,7 @@ Checks: "*  ,\
   -readability-braces-around-statements  ,\
   -readability-else-after-return  ,\
   -readability-implicit-bool-conversion  ,\
+  -readability-magic-numbers  ,\
 "
 
 WarningsAsErrors: ""
@@ -39,8 +42,8 @@ HeaderFilterRegex: ".*"
 AnalyzeTemporaryDtors: false
 FormatStyle: none
 CheckOptions:
-  - key: hicpp-move-const-arg.CheckTriviallyCopyableMove
-    value: 0
   - key: performance-move-const-arg.CheckTriviallyCopyableMove
     value: 0
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: 1
 ...

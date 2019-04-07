@@ -5,7 +5,7 @@
 namespace utils {
 
 template <typename Function, typename... Args>
-auto bind_front(Function&& callable, Args&&... args);
+[[nodiscard]] auto bind_front(Function&& callable, Args&&... args);
 
 
 template <typename Function, typename... Args>

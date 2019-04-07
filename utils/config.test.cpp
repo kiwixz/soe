@@ -21,7 +21,7 @@ TEST_SUITE("config")
         conf.set("bool", 1);
         CHECK(conf.get<bool>("bool"));
         conf.set("bool", 2);
-        CHECK_THROWS(conf.get<bool>("bool"));
+        CHECK_THROWS((void)conf.get<bool>("bool"));
 
         conf.set("char", -42);
         CHECK(conf.get<char>("char") == -42);
@@ -29,44 +29,44 @@ TEST_SUITE("config")
         CHECK(conf.get<short>("short") == -42);
         conf.set("int", -42);
         CHECK(conf.get<int>("int") == -42);
-        conf.set("long long", -42ll);
+        conf.set("long long", -42LL);
         CHECK(conf.get<long long>("long long") == -42);
-        conf.set("unsigned char", 42u);
-        CHECK(conf.get<unsigned char>("unsigned char") == 42u);
-        conf.set("unsigned short", 42u);
-        CHECK(conf.get<unsigned short>("unsigned short") == 42u);
-        conf.set("unsigned int", 42u);
-        CHECK(conf.get<unsigned int>("unsigned int") == 42u);
-        conf.set("unsigned long long", 42ull);
-        CHECK(conf.get<unsigned long long>("unsigned long long") == 42ull);
+        conf.set("unsigned char", 42U);
+        CHECK(conf.get<unsigned char>("unsigned char") == 42U);
+        conf.set("unsigned short", 42U);
+        CHECK(conf.get<unsigned short>("unsigned short") == 42U);
+        conf.set("unsigned int", 42U);
+        CHECK(conf.get<unsigned int>("unsigned int") == 42U);
+        conf.set("unsigned long long", 42ULL);
+        CHECK(conf.get<unsigned long long>("unsigned long long") == 42ULL);
         conf.set("float", -.42);
-        CHECK(conf.get<float>("float") == -.42f);
+        CHECK(conf.get<float>("float") == -.42F);
         conf.set("double", 42.);
         CHECK(conf.get<double>("double") == 42.);
 
         conf.set("float", "-.42");
-        CHECK(conf.get<float>("float") == -.42f);
+        CHECK(conf.get<float>("float") == -.42F);
         conf.set("double", "42.");
         CHECK(conf.get<double>("double") == 42.);
 
         conf.set("bad", "42a");
-        CHECK_THROWS(conf.get<int>("bad"));
-        CHECK_THROWS(conf.get<float>("bad"));
+        CHECK_THROWS((void)conf.get<int>("bad"));
+        CHECK_THROWS((void)conf.get<float>("bad"));
         conf.set("bad", "a42");
-        CHECK_THROWS(conf.get<int>("bad"));
-        CHECK_THROWS(conf.get<float>("bad"));
+        CHECK_THROWS((void)conf.get<int>("bad"));
+        CHECK_THROWS((void)conf.get<float>("bad"));
         conf.set("bad", "42-");
-        CHECK_THROWS(conf.get<int>("bad"));
-        CHECK_THROWS(conf.get<float>("bad"));
+        CHECK_THROWS((void)conf.get<int>("bad"));
+        CHECK_THROWS((void)conf.get<float>("bad"));
         conf.set("bad", "42+");
-        CHECK_THROWS(conf.get<int>("bad"));
-        CHECK_THROWS(conf.get<float>("bad"));
+        CHECK_THROWS((void)conf.get<int>("bad"));
+        CHECK_THROWS((void)conf.get<float>("bad"));
         conf.set("bad", "abc");
-        CHECK_THROWS(conf.get<int>("bad"));
-        CHECK_THROWS(conf.get<float>("bad"));
+        CHECK_THROWS((void)conf.get<int>("bad"));
+        CHECK_THROWS((void)conf.get<float>("bad"));
         conf.set("bad", "");
-        CHECK_THROWS(conf.get<int>("bad"));
-        CHECK_THROWS(conf.get<float>("bad"));
+        CHECK_THROWS((void)conf.get<int>("bad"));
+        CHECK_THROWS((void)conf.get<float>("bad"));
 
         struct S {
             std::string s;
@@ -87,9 +87,10 @@ TEST_SUITE("config")
         bool allow_unknown = false;
 
         auto parse = [&](auto&&... args) {
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay, hicpp-no-array-decay)
             std::array<std::string, sizeof...(args) + 1> args_str{"self", std::forward<decltype(args)>(args)...};
             std::array<char*, sizeof...(args) + 2> argv;
-            for (unsigned i = 0; i < args_str.size(); ++i)
+            for (size_t i = 0; i < args_str.size(); ++i)
                 argv[i] = args_str[i].data();
             argv[argv.size() - 1] = nullptr;
             int argc = static_cast<int>(argv.size() - 1);
@@ -126,9 +127,10 @@ TEST_SUITE("config")
         Config conf;
 
         auto parse = [&](auto&&... args) {
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-array-to-pointer-decay, hicpp-no-array-decay)
             std::array<std::string, sizeof...(args) + 1> args_str = {"self", std::forward<decltype(args)>(args)...};
             std::array<char*, sizeof...(args) + 2> argv;
-            for (unsigned i = 0; i < args_str.size(); ++i)
+            for (size_t i = 0; i < args_str.size(); ++i)
                 argv[i] = str_registry.emplace_front(std::move(args_str[i])).data();
             argv[argv.size() - 1] = nullptr;
             int argc = static_cast<int>(argv.size() - 1);

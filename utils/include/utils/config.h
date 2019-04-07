@@ -10,8 +10,8 @@
 namespace config {
 
 struct Config {
-    bool contains(std::string const& key) const;
-    std::string const& get_raw(std::string const& key) const;
+    [[nodiscard]] bool contains(std::string const& key) const;
+    [[nodiscard]] std::string const& get_raw(std::string const& key) const;
 
     void remove(std::string const& key);
     void clear();
@@ -24,11 +24,11 @@ struct Config {
     void parse_global_config(std::string_view app_name, bool allow_unknown = false);
     void parse_file(std::filesystem::path const& path, bool allow_unknown = false);
     void parse_file_content(std::string_view content, bool allow_unknown = false);
-    std::string dump(std::string_view prefix) const;
+    [[nodiscard]] std::string dump(std::string_view prefix) const;
     void show_help(std::string_view app_name) const;
 
     template <typename T>
-    T get(std::string const& key) const;
+    [[nodiscard]] T get(std::string const& key) const;
 
     template <typename T>
     void get(std::string const& key, T& value) const;

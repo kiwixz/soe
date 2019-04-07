@@ -69,7 +69,7 @@ bool Config::parse_args(int& argc, char** argv, bool allow_unknown)
     argc -= static_cast<int>(used_args.size());
     int old_index = used_args[0] + 1;
     int new_index = used_args[0];
-    for (unsigned i = 1; i < used_args.size(); ++i) {
+    for (size_t i = 1; i < used_args.size(); ++i) {
         for (; old_index < used_args[i]; ++old_index, ++new_index)
             argv[new_index] = argv[old_index];
         ++old_index;

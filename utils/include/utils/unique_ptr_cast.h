@@ -5,11 +5,11 @@
 namespace utils {
 
 template <typename Derived, typename Base>
-std::unique_ptr<Derived> static_unique_ptr_cast(std::unique_ptr<Base>&& ptr);
+[[nodiscard]] std::unique_ptr<Derived> static_unique_ptr_cast(std::unique_ptr<Base>&& ptr);
 
 /// Will not alter base pointer on conversion failure (returning null).
 template <typename Derived, typename Base>
-std::unique_ptr<Derived> dynamic_unique_ptr_cast(std::unique_ptr<Base>&& ptr);
+[[nodiscard]] std::unique_ptr<Derived> dynamic_unique_ptr_cast(std::unique_ptr<Base>&& ptr);
 
 
 template <typename Derived, typename Base>

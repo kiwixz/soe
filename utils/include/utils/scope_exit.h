@@ -5,10 +5,12 @@
 namespace utils {
 
 /// Classic RAII wrapper.
-/// Functions convertable to bool and evaluating to false will not be run
+/// Functions convertible to bool and evaluating to false will not be run
 /// (so you can default construct with std::function and pointers safely).
+// clang-format off
+// nodiscard makes clang-format go crazy
 template <typename TFunction = void (*)()>
-struct ScopeExit {
+struct [[nodiscard]] ScopeExit {
     using Function = TFunction;
 
     ScopeExit() = default;
@@ -22,6 +24,7 @@ struct ScopeExit {
 private:
     Function function_{};
 };
+// clang-format on
 
 
 using ScopeExitGeneric = ScopeExit<std::function<void()>>;
@@ -35,9 +38,10 @@ ScopeExit<TFunction>::ScopeExit(Function function) :
 template <typename TFunction>
 ScopeExit<TFunction>::~ScopeExit()
 {
-    if constexpr (std::is_constructible_v<bool, Function>)
-        if (!function_)  // NOLINT(bugprone-suspicious-semicolon)
+    if constexpr (std::is_constructible_v<bool, Function>) {  // NOLINT(bugprone-suspicious-semicolon)
+        if (!function_)
             return;
+    }
     function_();
 }
 
