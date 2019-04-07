@@ -5,8 +5,16 @@
 [![](https://img.shields.io/badge/link-doxygen-blueviolet.svg)](https://kiwixz.github.io/soe/doc/master/)
 
 
-Perform motion interpolation on videos.  First, the goal is to implement it with CPU code for offline processing (similar to ffmpeg's `-vf minterpolate`).  Eventually, realtime processing using GPU will be implemented (probably with CUDA) and integrated to VLC via a module.
+Perform motion interpolation on videos.  Using it to increase framerate will give the video a [**S**oap **O**pera **E**ffect](https://en.wikipedia.org/wiki/Motion_interpolation#Soap_opera_effect).
 
 
+## Near future plans
+
+- Motion interpolation with CPU code for offline processing (similar to ffmpeg's `-vf minterpolate`).
+- VLC plugin
+- Realtime processing using GPU (probably with CUDA).
+
+
+#
 
 _Licensed under the [MIT License](LICENSE)._
