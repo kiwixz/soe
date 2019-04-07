@@ -8,9 +8,18 @@
 namespace soe {
 namespace {
 
+int parse_fourcc(std::string_view code)
+{
+    if (code.length() != 4)
+        throw std::runtime_error{fmt::format("invalid fourcc '{}', length is not 4", code)};
+    return cv::VideoWriter::fourcc(code[0], code[1], code[2], code[3]);
+}
+
 void main_impl(int argc, char** argv)
 {
     utils::Config conf;
+    conf.set("codec", "MJPG");  // the only codec opencv reliably supports *sigh*
+
     conf.parse_global_config("soe");
     if (conf.parse_args(argc, argv) || argc != 3) {
         conf.show_help(argv[0], "input_file output_file");
@@ -21,15 +30,15 @@ void main_impl(int argc, char** argv)
 
     cv::VideoCapture reader;
     if (!reader.open(input_file))
-        throw std::runtime_error{fmt::format("could not open source video '{}'", argv[1])};
+        throw std::runtime_error{fmt::format("could not open source video '{}' (codec/container may be unsupported)", input_file)};
 
     double out_fps = reader.get(cv::CAP_PROP_FPS);  // may return garbage on some codecs
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
                         static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
 
     cv::VideoWriter writer;
-    if (!writer.open(output_file, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), out_fps, frame_size))
-        throw std::runtime_error{fmt::format("could not open destination video '{}'", argv[2])};
+    if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_fps, frame_size))
+        throw std::runtime_error{fmt::format("could not open destination video '{}' (codec/container may be unsupported)", output_file)};
 
     cv::Mat frame;
     while (reader.read(frame)) {
