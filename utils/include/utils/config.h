@@ -25,7 +25,7 @@ struct Config {
     void parse_file(std::filesystem::path const& path, bool allow_unknown = false);
     void parse_file_content(std::string_view content, bool allow_unknown = false);
     [[nodiscard]] std::string dump(std::string_view prefix) const;
-    void show_help(std::string_view app_name) const;
+    void show_help(std::string_view app_name, std::string_view pos_args = "") const;
 
     template <typename T>
     [[nodiscard]] T get(std::string const& key) const;

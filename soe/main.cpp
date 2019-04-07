@@ -1,6 +1,7 @@
 #include <opencv2/videoio.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <utils/config.h>
 #include <filesystem>
 #include <string>
 
@@ -9,19 +10,25 @@ namespace {
 
 void main_impl(int argc, char** argv)
 {
-    (void)argc;
-    (void)argv;
+    utils::Config conf;
+    conf.parse_global_config("soe");
+    if (conf.parse_args(argc, argv) || argc != 3) {
+        conf.show_help(argv[0], "input_file output_file");
+        return;
+    }
+    std::string input_file = argv[1];
+    std::string output_file = argv[2];
 
     cv::VideoCapture reader;
-    if (!reader.open(argv[1]))
+    if (!reader.open(input_file))
         throw std::runtime_error{fmt::format("could not open source video '{}'", argv[1])};
 
-    double out_fps = reader.get(cv::CAP_PROP_FPS);  // may return garbage
+    double out_fps = reader.get(cv::CAP_PROP_FPS);  // may return garbage on some codecs
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
                         static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
 
     cv::VideoWriter writer;
-    if (!writer.open(argv[2], cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), out_fps, frame_size))
+    if (!writer.open(output_file, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), out_fps, frame_size))
         throw std::runtime_error{fmt::format("could not open destination video '{}'", argv[2])};
 
     cv::Mat frame;
