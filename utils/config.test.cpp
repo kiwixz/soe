@@ -4,7 +4,7 @@
 #include <forward_list>
 #include <iostream>
 
-namespace config::test {
+namespace utils::test {
 
 TEST_SUITE("config")
 {
@@ -176,4 +176,4 @@ TEST_SUITE("config")
     }
 }
 
-}  // namespace config::test
+}  // namespace utils::test

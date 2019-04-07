@@ -7,7 +7,7 @@
 #include <type_traits>
 #include <unordered_map>
 
-namespace config {
+namespace utils {
 
 struct Config {
     [[nodiscard]] bool contains(std::string const& key) const;
@@ -95,4 +95,4 @@ void Config::set(std::string key, T&& value)
         options_.insert_or_assign(std::move(key), std::forward<T>(value));
 }
 
-}  // namespace config
+}  // namespace utils

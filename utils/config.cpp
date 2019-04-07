@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 
-namespace config {
+namespace utils {
 namespace {
 
 constexpr std::string_view implicit_value = "true";
@@ -191,4 +191,4 @@ void Config::set_parsed_option(std::string key, std::string value, bool allow_un
         it->second = std::move(value);
 }
 
-}  // namespace config
+}  // namespace utils
