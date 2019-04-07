@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['options_5f',['options_',['../structconfig_1_1_config.html#afe62503feadccbca6a8449f4ad1f53b1',1,'config::Config']]]
+  ['options_5f',['options_',['../structutils_1_1_config.html#a4fdd53aa6ee9dc4f580fe1ae90b01010',1,'utils::Config']]]
 ];
