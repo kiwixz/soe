@@ -47,7 +47,7 @@ def install_vcpkg_packages():
     dir_util.copy_tree("vcpkg_config", "vcpkg")
     triplet = "x64-windows" if is_win() else "x64-linux"
     vcpkg_exe = str(Path("vcpkg") / "vcpkg")
-    subprocess.check_call([vcpkg_exe, "remove", "--outdated", "--no-purge"])
+    subprocess.check_call([vcpkg_exe, "remove", "--outdated", "--no-purge", "--recurse"])
     subprocess.check_call([vcpkg_exe, "install", "--triplet", triplet] + VCPKG_LIBS)
 
 
