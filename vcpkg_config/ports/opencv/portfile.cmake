@@ -14,8 +14,6 @@ vcpkg_from_github(
         "${CMAKE_CURRENT_LIST_DIR}/0003-fix-compilation.patch"
 )
 
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindFFMPEG.cmake DESTINATION ${SOURCE_PATH}/cmake/modules/videoio)
-
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
@@ -43,7 +41,9 @@ vcpkg_configure_cmake(
         -DBUILD_TIFF=OFF
         -DBUILD_WEBP=OFF
         -DBUILD_ZLIB=OFF
+
         -DOPENCV_FFMPEG_USE_FIND_PACKAGE=ON
+        -DFFMPEG_DIR=${CMAKE_CURRENT_LIST_DIR}
 )
 
 vcpkg_install_cmake()
