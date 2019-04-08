@@ -1,5 +1,6 @@
 version: 2.1
 
+
 jobs:
   "build":
     docker:
@@ -8,6 +9,24 @@ jobs:
       CMAKE_BUILD_PARALLEL_LEVEL: 4
     steps:
       - checkout
+
+      - restore_cache:
+          name: Restore pacman cache
+          keys:
+            - packages-0-{{ .Branch }}-{{ .Revision }}
+            - packages-0-{{ .Branch }}-
+            - packages-0-
+      - run:
+          name: Install system dependencies
+          command: |
+            pacman --color=always --needed --noconfirm -Sy  \
+                yasm  `# opencv (ffmpeg)`
+      - save_cache:
+          name: Save pacman cache
+          key: packages-0-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - /var/cache/pacman/pkg
+
       - restore_cache:
           name: Restore vcpkg cache
           keys:
@@ -24,11 +43,13 @@ jobs:
           key: vcpkg-0-{{ .Branch }}-{{ .Revision }}
           paths:
             - /opt/vcpkg
+
       - run:
           name: Dump versions
           command: |
             pacman --color=always -Q
             vcpkg list
+
       - run:
           name: Test debug
           environment:
@@ -58,6 +79,7 @@ jobs:
           command: |
             cd "build/debug"
             ctest --output-on-failure -R "check_.*"
+
   "doc":
     docker:
       - image: kiwixz/ci-doc:2019-04-07
@@ -80,6 +102,7 @@ jobs:
             git -C "build/gh-pages" -c "user.name=ci" -c "user.email=ci" commit  \
                 -m "[ci] update 'doc/$CIRCLE_BRANCH' commit $CIRCLE_SHA1"
             git -C "build/gh-pages" push
+
 
 workflows:
   version: 2
