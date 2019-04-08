@@ -14,7 +14,7 @@ vcpkg_from_github(
         "${CMAKE_CURRENT_LIST_DIR}/0003-fix-compilation.patch"
 )
 
-file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindFFMPEG.cmake DESTINATION ${SOURCE_PATH}/cmake)
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindFFMPEG.cmake DESTINATION ${SOURCE_PATH}/cmake/modules/videoio)
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
