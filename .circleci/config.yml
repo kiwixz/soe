@@ -20,7 +20,7 @@ jobs:
           name: Install system dependencies
           command: |
             pacman --color=always --needed --noconfirm -Sy  \
-                yasm  `# opencv (ffmpeg)`
+                awk yasm  `# opencv (ffmpeg)`
       - save_cache:
           name: Save pacman cache
           key: packages-0-{{ .Branch }}-{{ .Revision }}
