@@ -11,7 +11,10 @@ vcpkg_from_github(
     PATCHES
         "${CMAKE_CURRENT_LIST_DIR}/0001-fix-paths.patch"
         "${CMAKE_CURRENT_LIST_DIR}/0002-fix-paths-linux.patch"
+        "${CMAKE_CURRENT_LIST_DIR}/0003-fix-compilation.patch"
 )
+
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindFFMPEG.cmake DESTINATION ${SOURCE_PATH}/cmake)
 
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
@@ -40,6 +43,7 @@ vcpkg_configure_cmake(
         -DBUILD_TIFF=OFF
         -DBUILD_WEBP=OFF
         -DBUILD_ZLIB=OFF
+        -DOPENCV_FFMPEG_USE_FIND_PACKAGE=ON
 )
 
 vcpkg_install_cmake()
@@ -90,9 +94,3 @@ else ()
 endif ()
 
 configure_file(${SOURCE_PATH}/LICENSE ${CURRENT_PACKAGES_DIR}/share/opencv/copyright COPYONLY)
-
-if (WIN32)
-    # lie to allow ffmpeg dlls
-    set(VCPKG_LIBRARY_LINKAGE dynamic)
-    set(VCPKG_POLICY_ALLOW_OBSOLETE_MSVCRT enabled)
-endif ()
