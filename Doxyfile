@@ -1,10 +1,10 @@
 # Doxyfile 1.8.14
 
 
-PROJECT_NAME           = "Leitse"
+PROJECT_NAME           = "soe"
 
 INPUT                  = README.md  \
-                         leitse config utils
+                         libsoe soe utils
 
 
 # This file describes the settings to be used by the documentation system
