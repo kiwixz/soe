@@ -18,7 +18,7 @@ int parse_fourcc(std::string_view code)
 void main_impl(int argc, char** argv)
 {
     utils::Config conf;
-    conf.set("codec", "MJPG");  // the only codec opencv reliably supports *sigh*
+    conf.set("codec", "HFYU");
 
     conf.parse_global_config("soe");
     if (conf.parse_args(argc, argv) || argc != 3) {
@@ -32,7 +32,7 @@ void main_impl(int argc, char** argv)
     if (!reader.open(input_file))
         throw std::runtime_error{fmt::format("could not open source video '{}' (codec/container may be unsupported)", input_file)};
 
-    double out_fps = reader.get(cv::CAP_PROP_FPS);  // may return garbage on some codecs
+    double out_fps = reader.get(cv::CAP_PROP_FPS);
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
                         static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
 

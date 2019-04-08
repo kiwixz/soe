@@ -177,7 +177,7 @@ void Config::show_help(std::string_view app_name, std::string_view pos_args) con
     fmt::print("Usage: {} [--help] [+config_file] [-option[=value]...]", app_name);
     if (!pos_args.empty())
         fmt::print(" [--] {}", pos_args);
-    fmt::print("\nOptions and their default values:\n{}", dump("\t"));
+    fmt::print("\nCurrent config:\n{}", dump("\t"));
 }
 
 void Config::set_parsed_option(std::string key, std::string value, bool allow_unknown)

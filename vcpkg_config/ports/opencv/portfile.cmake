@@ -5,12 +5,13 @@ vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO opencv/opencv
-    REF 4.0.1
-    SHA512 d74dd325029a67676dd2c7fdbecb2b14cb531441b2a1b74fc1ebe6db096ea87c12801c8b997ebbe280fbd401311c0220133a0c29911b0dae82cb93453be0b2b0
+    REF 4.1.0
+    SHA512 492168c1260cd30449393c4b266d75202e751493a8f1e184af6c085d8f4a38800ee954d84fe8c36fcceb690b1ebb5e511b68c05901f64be79a0915f3f8a46dc0
     HEAD_REF master
     PATCHES
         "${CMAKE_CURRENT_LIST_DIR}/0001-fix-paths.patch"
         "${CMAKE_CURRENT_LIST_DIR}/0002-fix-paths-linux.patch"
+        "${CMAKE_CURRENT_LIST_DIR}/0003-fix-compilation.patch"
 )
 
 vcpkg_configure_cmake(
@@ -40,6 +41,9 @@ vcpkg_configure_cmake(
         -DBUILD_TIFF=OFF
         -DBUILD_WEBP=OFF
         -DBUILD_ZLIB=OFF
+
+        -DOPENCV_FFMPEG_USE_FIND_PACKAGE=ON
+        -DFFMPEG_DIR=${CMAKE_CURRENT_LIST_DIR}
 )
 
 vcpkg_install_cmake()
@@ -90,9 +94,3 @@ else ()
 endif ()
 
 configure_file(${SOURCE_PATH}/LICENSE ${CURRENT_PACKAGES_DIR}/share/opencv/copyright COPYONLY)
-
-if (WIN32)
-    # lie to allow ffmpeg dlls
-    set(VCPKG_LIBRARY_LINKAGE dynamic)
-    set(VCPKG_POLICY_ALLOW_OBSOLETE_MSVCRT enabled)
-endif ()
