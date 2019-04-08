@@ -10,7 +10,7 @@ from distutils import dir_util
 from pathlib import Path
 
 
-VCPKG_COMMIT = "bc907b64ee5ccd8e5391c38d8badf076a6b977bb"
+VCPKG_COMMIT = "b49c739129dfbc6a13e2881494084119fc221a5e"
 VCPKG_LIBS = [
     "doctest",
     "fmt",

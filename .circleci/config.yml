@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   "build":
     docker:
-      - image: kiwixz/ci-cpp:2019-04-07
+      - image: kiwixz/ci-cpp:2019-04-14
     environment:
       CMAKE_BUILD_PARALLEL_LEVEL: 4
     steps:
@@ -82,7 +82,7 @@ jobs:
 
   "doc":
     docker:
-      - image: kiwixz/ci-doc:2019-04-07
+      - image: kiwixz/ci-doc:2019-04-14
     steps:
       - add_ssh_keys
       - checkout
