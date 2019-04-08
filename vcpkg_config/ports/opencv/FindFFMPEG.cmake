@@ -10,6 +10,4 @@ if (WIN32)
     list(APPEND FFMPEG_LIBRARIES onecore)
 endif ()
 
-include_directories(SYSTEM ${FFMPEG_INCLUDE_DIRS})  # OpenCV 4.0.1 need this, seems fixed on master
-
 find_package_handle_standard_args(FFMPEG REQUIRED_VARS FFMPEG_LIBRARIES FFMPEG_INCLUDE_DIRS)
