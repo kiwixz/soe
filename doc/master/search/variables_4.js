@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['state_5f',['state_',['../structutils_1_1_rand64.html#a57f5b5237f76c36b597f0a6ed02aad44',1,'utils::Rand64::state_()'],['../structutils_1_1_rand_f.html#a64c1b137ad9408c3839127b4170ceec0',1,'utils::RandF::state_()']]],
-  ['stopping_5f',['stopping_',['../structutils_1_1_thread_pool.html#a4bd5a27067e2069e42ba2d96d0835faa',1,'utils::ThreadPool']]]
+  ['implicit_5fvalue',['implicit_value',['../namespaceutils_1_1anonymous__namespace_02config_8cpp_03.html#a7f1c3d8e6cf62a3c42cca3429e9a438d',1,'utils::anonymous_namespace{config.cpp}']]],
+  ['init',['init',['../structutils_1_1_shared_handle.html#abdeff40634d60396be3af0f5f626b188',1,'utils::SharedHandle']]],
+  ['instance_5f',['instance_',['../structutils_1_1_shared_handle.html#adc522a7d573b51f0e42d2e3548173706',1,'utils::SharedHandle']]]
 ];
