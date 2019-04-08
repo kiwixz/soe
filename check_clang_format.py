@@ -24,7 +24,7 @@ def check(path, check_id):
         if not diff_result:
             return True
         logging.warning("differences found:")
-        sys.stdout.writelines(diff_result)
+        sys.stderr.writelines(diff_result)
         print()
         return False
 

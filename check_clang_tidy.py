@@ -21,7 +21,7 @@ def check(path, check_id):
         if not errors:
             return True
         logging.warning("errors found:")
-        print(errors, '\n')
+        print(errors, '\n', file=sys.stderr)
         return False
 
     return result
