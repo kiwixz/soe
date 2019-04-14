@@ -1,5 +1,5 @@
 #include "utils/paths.h"
-#include <utils/scope_exit.h>
+#include "utils/scope_exit.h"
 #include <cstdlib>
 
 #ifdef _WIN32

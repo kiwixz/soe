@@ -1,7 +1,7 @@
+#include "utils/config.h"
 #include <opencv2/videoio.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <utils/config.h>
 #include <filesystem>
 #include <string>
 
