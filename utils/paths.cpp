@@ -1,4 +1,5 @@
 #include "utils/paths.h"
+#include "utils/exception.h"
 #include "utils/scope_exit.h"
 #include <cstdlib>
 
@@ -17,7 +18,7 @@ std::filesystem::path get_kiwixz_home(std::string_view app_name)
 #ifdef _WIN32
     wchar_t* base;
     if (SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_CREATE, nullptr, &base) != S_OK)
-        throw std::runtime_error{"could not get appdata"};
+        throw utils::Exception{"could not get appdata"};
     ScopeExit free_base{[&] {
         CoTaskMemFree(base);
     }};
@@ -32,10 +33,10 @@ std::filesystem::path get_kiwixz_home(std::string_view app_name)
         while (getpwuid_r(getuid(), &pw, buffer.data(), buffer.size(), &result) == ERANGE)
             buffer.resize(buffer.size() * 2);
         if (!result)
-            throw std::runtime_error{"could not get HOME nor passwd of user"};
+            throw utils::Exception{"could not get HOME nor passwd of user"};
         base = result->pw_dir;  // pointee is in buffer
         if (!base)
-            throw std::runtime_error{"user has no home"};
+            throw utils::Exception{"user has no home"};
     }
     std::filesystem::path path = std::filesystem::path{base} / ".kiwixz" / app_name;
 #endif

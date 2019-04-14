@@ -26,7 +26,7 @@ std::string const& Config::get_raw(std::string const& key) const
 void Config::remove(std::string const& key)
 {
     if (options_.erase(key) == 0)
-        throw std::runtime_error{fmt::format("key '{}' missing", key)};
+        throw utils::Exception{"key '{}' missing", key};
 }
 
 void Config::clear()
@@ -96,7 +96,7 @@ void Config::parse_file(std::filesystem::path const& path, bool allow_unknown)
 {
     std::ifstream ifs{path, std::ios::ate};
     if (!ifs)
-        throw std::runtime_error{fmt::format("could not open config file '{}'", path.generic_string())};
+        throw utils::Exception{"could not open config file '{}'", path.generic_string()};
     std::streamoff size = ifs.tellg();
     std::string content(size, '\0');
     ifs.seekg(0, std::ios::beg);
@@ -187,7 +187,7 @@ void Config::set_parsed_option(std::string key, std::string value, bool allow_un
         if (allow_unknown)
             options_.insert({std::move(key), std::move(value)});
         else
-            throw std::runtime_error{fmt::format("unknown option '{}'", key)};
+            throw utils::Exception{"unknown option '{}'", key};
     }
     else
         it->second = std::move(value);

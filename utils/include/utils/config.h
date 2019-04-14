@@ -1,9 +1,9 @@
 #pragma once
 
+#include "utils/exception.h"
 #include <fmt/format.h>
 #include <cstdlib>
 #include <filesystem>
-#include <stdexcept>
 #include <type_traits>
 #include <unordered_map>
 
@@ -52,11 +52,11 @@ T Config::get(std::string const& key) const
             return true;
         else if (value == "false" || value == "0")
             return false;
-        throw std::runtime_error{fmt::format("key '{}': expected boolean value, got '{}'", key, value)};
+        throw utils::Exception{"key '{}': expected boolean value, got '{}'", key, value};
     }
     else if constexpr (std::is_arithmetic_v<T>) {
         if (value.length() == 0)
-            throw std::runtime_error{fmt::format("key '{}': expected numeric value, got empty string", key)};
+            throw utils::Exception{"key '{}': expected numeric value, got empty string", key};
 
         char* end;
         T result;
@@ -70,8 +70,8 @@ T Config::get(std::string const& key) const
             result = static_cast<T>(std::strtold(value.c_str(), &end));
 
         if (end != value.c_str() + value.length())
-            throw std::runtime_error{fmt::format("key '{}': expected {} value, got '{}'",
-                                                 key, std::is_integral_v<T> ? "integer" : "floating-point", value)};
+            throw utils::Exception{"key '{}': expected {} value, got '{}'",
+                                   key, std::is_integral_v<T> ? "integer" : "floating-point", value};
         return result;
     }
     else

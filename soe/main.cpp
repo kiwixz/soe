@@ -11,7 +11,7 @@ namespace {
 int parse_fourcc(std::string_view code)
 {
     if (code.length() != 4)
-        throw std::runtime_error{fmt::format("invalid fourcc '{}', length is not 4", code)};
+        throw utils::Exception{ fmt::format("invalid fourcc '{}', length is not 4", code};
     return cv::VideoWriter::fourcc(code[0], code[1], code[2], code[3]);
 }
 
@@ -30,7 +30,7 @@ void main_impl(int argc, char** argv)
 
     cv::VideoCapture reader;
     if (!reader.open(input_file))
-        throw std::runtime_error{fmt::format("could not open source video '{}' (codec/container may be unsupported)", input_file)};
+        throw utils::Exception{"could not open source video '{}' (codec/container may be unsupported)", input_file};
 
     double out_fps = reader.get(cv::CAP_PROP_FPS);
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
@@ -38,7 +38,7 @@ void main_impl(int argc, char** argv)
 
     cv::VideoWriter writer;
     if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_fps, frame_size))
-        throw std::runtime_error{fmt::format("could not open destination video '{}' (codec/container may be unsupported)", output_file)};
+        throw utils::Exception{"could not open destination video '{}' (codec/container may be unsupported)", output_file};
 
     cv::Mat frame;
     while (reader.read(frame)) {
