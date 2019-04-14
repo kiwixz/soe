@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['rand64',['Rand64',['../structutils_1_1_rand64.html',1,'utils']]],
-  ['randf',['RandF',['../structutils_1_1_rand_f.html',1,'utils']]]
+  ['pictureyv12',['PictureYV12',['../structsoe_1_1_picture_y_v12.html',1,'soe']]]
 ];
