@@ -11,7 +11,7 @@ namespace {
 int parse_fourcc(std::string_view code)
 {
     if (code.length() != 4)
-        throw utils::Exception{ fmt::format("invalid fourcc '{}', length is not 4", code};
+        throw utils::Exception{"invalid fourcc '{}', length is not 4", code};
     return cv::VideoWriter::fourcc(code[0], code[1], code[2], code[3]);
 }
 

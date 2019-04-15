@@ -1,5 +1,6 @@
 #pragma once
 
+#include "utils/exception.h"
 #include <functional>
 #include <future>
 #include <queue>
