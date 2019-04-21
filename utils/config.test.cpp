@@ -173,6 +173,21 @@ TEST_SUITE("config")
         CHECK_THROWS(conf.parse_file_content("[s.s2]n=0"));
         conf.parse_file_content("[s.s2]n=0", true);
         CHECK(conf.get_raw("s.s2.n") == "0");
+        CHECK_THROWS(conf.parse_file_content("["));
+        CHECK_THROWS(conf.parse_file_content("[abc"));
+
+        conf.parse_file_content("[  s  ]\r\nn=1");
+        CHECK(conf.get_raw("s.n") == "1");
+        conf.parse_file_content("[s]\r\nn");
+        CHECK(conf.get_raw("s.n") == "true");
+        conf.parse_file_content("[s]\r\nn=");
+        CHECK(conf.get_raw("s.n") == "");
+        conf.parse_file_content("[s]\r\nn= ");
+        CHECK(conf.get_raw("s.n") == "");
+        conf.parse_file_content("[s]\r\n    n \t\t =  \ta");
+        CHECK(conf.get_raw("s.n") == " \ta");
+        conf.parse_file_content("[s\r\nn=0");
+        CHECK(conf.get_raw("s.n") == "0");
     }
 }
 

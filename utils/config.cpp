@@ -163,15 +163,17 @@ void Config::parse_file_content(std::string_view content, bool allow_unknown)
         std::string value;
         if (ptr == end)
             value = implicit_value;
-        else if (ptr + 1 < end) {  // *ptr is '=' but not the last char
+        else {  // *ptr is '='
             ++ptr;
-            if (is_blank(*ptr))  // skip only one blank (so you can start value with blanks without escaping)
-                ++ptr;
-            const char* value_begin = ptr;
-            while (!is_endline(ptr))
-                ++ptr;
-            const char* value_end = ptr;
-            value = {value_begin, value_end};
+            if (ptr < end) {
+                if (is_blank(*ptr))  // skip only one blank (so you can start value with blanks without escaping)
+                    ++ptr;
+                const char* value_begin = ptr;
+                while (!is_endline(ptr))
+                    ++ptr;
+                const char* value_end = ptr;
+                value = {value_begin, value_end};
+            }
         }
 
         set_parsed_option(prefix + std::move(key), std::move(value), allow_unknown);
