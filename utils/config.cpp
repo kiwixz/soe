@@ -112,30 +112,42 @@ void Config::parse_file_content(std::string_view content, bool allow_unknown)
     auto is_endline = [&](const char* c) {
         return c >= end || *c == '\n' || *c == '\r';
     };
+    auto is_blank = [&](char c) {
+        return c == ' ' || c == '\t';
+    };
 
     std::string prefix;
     while (ptr < end) {
-        while (ptr < end && (is_endline(ptr) || *ptr == ' ' || *ptr == '\t'))
+        while (ptr < end && (is_endline(ptr) || is_blank(*ptr)))
             ++ptr;
         if (ptr >= end)
             break;
 
-        if (*ptr == '#') {
+        if (*ptr == '#') {  // comment
             while (!is_endline(ptr))
                 ++ptr;
             continue;
         }
-        else if (*ptr == '[') {
+        else if (*ptr == '[') {  // section header
             ++ptr;
+            while (!is_endline(ptr) && is_blank(*ptr))  // skip blanks at beginning
+                ++ptr;
             const char* section_begin = ptr;
             while (!(is_endline(ptr) || *ptr == ']'))
                 ++ptr;
             if (ptr >= end)
-                break;
+                throw utils::Exception{"config has mismatched '['"};
             const char* section_end = ptr;
-            prefix = {section_begin, section_end};
-            if (!prefix.empty())
-                prefix += '.';
+            while (section_end > section_begin && is_blank(section_end[-1]))  // trim blanks at end
+                --section_end;
+
+            std::string section = {section_begin, section_end};
+            if (section.empty())
+                prefix = {};
+            else if (section[0] == '.')
+                prefix += section.substr(1) + '.';
+            else
+                prefix = std::move(section) + '.';
             ++ptr;
             continue;
         }
@@ -144,19 +156,23 @@ void Config::parse_file_content(std::string_view content, bool allow_unknown)
         while (!(is_endline(ptr) || *ptr == '='))
             ++ptr;
         const char* key_end = ptr;
+        while (key_end > key_begin && is_blank(key_end[-1]))  // trim blanks at end
+            --key_end;
         std::string key{key_begin, key_end};
 
         std::string value;
-        if (ptr < end && *ptr == '=') {
+        if (ptr == end)
+            value = implicit_value;
+        else if (ptr + 1 < end) {  // *ptr is '=' but not the last char
             ++ptr;
+            if (is_blank(*ptr))  // skip only one blank (so you can start value with blanks without escaping)
+                ++ptr;
             const char* value_begin = ptr;
             while (!is_endline(ptr))
                 ++ptr;
             const char* value_end = ptr;
             value = {value_begin, value_end};
         }
-        else
-            value = implicit_value;
 
         set_parsed_option(prefix + std::move(key), std::move(value), allow_unknown);
     }
