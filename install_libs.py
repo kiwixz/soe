@@ -54,8 +54,11 @@ def install_vcpkg_packages():
 def cleanup_vcpkg():
     logging.info("cleaning up vcpkg")
     vcpkg_path = Path("vcpkg")
-    shutil.rmtree(vcpkg_path / "buildtrees", True)
     shutil.rmtree(vcpkg_path / "packages", True)
+    for lib in (vcpkg_path / "buildtrees").glob("*"):
+        for dir in lib.glob("*"):
+            if dir.is_dir() and dir.name != "src":  # keep source for debugging
+                shutil.rmtree(str(dir))
     for file in (vcpkg_path / "downloads").glob("*"):
         if file.is_file():
             file.unlink()
