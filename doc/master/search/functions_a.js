@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scopeexit',['ScopeExit',['../structutils_1_1_scope_exit.html#a819261840ec8da70baba1d9f34b2de99',1,'utils::ScopeExit::ScopeExit()=default'],['../structutils_1_1_scope_exit.html#a61c3a1018aed62014ca53f71e02e0493',1,'utils::ScopeExit::ScopeExit(Function function)'],['../structutils_1_1_scope_exit.html#a94a44498e2587fd31a9305fa4579af56',1,'utils::ScopeExit::ScopeExit(ScopeExit const &amp;)=delete'],['../structutils_1_1_scope_exit.html#abf0224ced05a0bf04d481a691201cc43',1,'utils::ScopeExit::ScopeExit(ScopeExit &amp;&amp;other) noexcept']]],
+  ['scopeexit',['ScopeExit',['../structutils_1_1_scope_exit.html#a819261840ec8da70baba1d9f34b2de99',1,'utils::ScopeExit::ScopeExit()=default'],['../structutils_1_1_scope_exit.html#a61c3a1018aed62014ca53f71e02e0493',1,'utils::ScopeExit::ScopeExit(Function function)'],['../structutils_1_1_scope_exit.html#a0b7af506b0aff51ca1e4756d053c3ace',1,'utils::ScopeExit::ScopeExit(const ScopeExit &amp;)=delete'],['../structutils_1_1_scope_exit.html#abf0224ced05a0bf04d481a691201cc43',1,'utils::ScopeExit::ScopeExit(ScopeExit &amp;&amp;other) noexcept']]],
   ['set',['set',['../structutils_1_1_config.html#ab48651341ab189a185bb4a995703deeb',1,'utils::Config']]],
   ['set_5fparsed_5foption',['set_parsed_option',['../structutils_1_1_config.html#a582f735328e8c0b4766654c6b8ccbacd',1,'utils::Config']]],
   ['sharedcallable',['SharedCallable',['../structutils_1_1_thread_pool_1_1_shared_callable.html#ac4447f8ce866508f4330d7877fcf4e58',1,'utils::ThreadPool::SharedCallable']]],
