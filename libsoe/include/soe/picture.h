@@ -13,11 +13,11 @@ struct PictureYV12 {
     [[nodiscard]] int height() const;
 
     [[nodiscard]] uint8_t* y();
-    [[nodiscard]] uint8_t const* y() const;
+    [[nodiscard]] const uint8_t* y() const;
     [[nodiscard]] uint8_t* u();
-    [[nodiscard]] uint8_t const* u() const;
+    [[nodiscard]] const uint8_t* u() const;
     [[nodiscard]] uint8_t* v();
-    [[nodiscard]] uint8_t const* v() const;
+    [[nodiscard]] const uint8_t* v() const;
 
 private:
     int width_;

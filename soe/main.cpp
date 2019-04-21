@@ -61,7 +61,7 @@ int main(int argc, char** argv)
         main_impl(argc, argv);
         spdlog::drop_all();
     }
-    catch (std::exception const& ex) {
+    catch (const std::exception& ex) {
         spdlog::critical(ex.what());
         return 1;
     }

@@ -13,17 +13,17 @@ constexpr std::string_view implicit_value = "true";
 }
 
 
-bool Config::contains(std::string const& key) const
+bool Config::contains(const std::string& key) const
 {
     return options_.count(key) > 0;
 }
 
-std::string const& Config::get_raw(std::string const& key) const
+const std::string& Config::get_raw(const std::string& key) const
 {
     return options_.at(key);
 }
 
-void Config::remove(std::string const& key)
+void Config::remove(const std::string& key)
 {
     if (options_.erase(key) == 0)
         throw utils::Exception{"key '{}' missing", key};
@@ -82,7 +82,7 @@ bool Config::parse_args(int& argc, char** argv, bool allow_unknown)
 
 void Config::parse_global_config(std::string_view app_name, bool allow_unknown)
 {
-    auto parse_if_exists = [&](std::filesystem::path const& path) {
+    auto parse_if_exists = [&](const std::filesystem::path& path) {
         if (std::filesystem::exists(path))
             parse_file(path, allow_unknown);
     };
@@ -92,7 +92,7 @@ void Config::parse_global_config(std::string_view app_name, bool allow_unknown)
     parse_if_exists(file_name);
 }
 
-void Config::parse_file(std::filesystem::path const& path, bool allow_unknown)
+void Config::parse_file(const std::filesystem::path& path, bool allow_unknown)
 {
     std::ifstream ifs{path, std::ios::ate};
     if (!ifs)
@@ -107,9 +107,9 @@ void Config::parse_file(std::filesystem::path const& path, bool allow_unknown)
 
 void Config::parse_file_content(std::string_view content, bool allow_unknown)
 {
-    char const* ptr = content.data();
-    char const* end = content.data() + content.size();
-    auto is_endline = [&](char const* c) {
+    const char* ptr = content.data();
+    const char* end = content.data() + content.size();
+    auto is_endline = [&](const char* c) {
         return c >= end || *c == '\n' || *c == '\r';
     };
 
@@ -127,12 +127,12 @@ void Config::parse_file_content(std::string_view content, bool allow_unknown)
         }
         else if (*ptr == '[') {
             ++ptr;
-            char const* section_begin = ptr;
+            const char* section_begin = ptr;
             while (!(is_endline(ptr) || *ptr == ']'))
                 ++ptr;
             if (ptr >= end)
                 break;
-            char const* section_end = ptr;
+            const char* section_end = ptr;
             prefix = {section_begin, section_end};
             if (!prefix.empty())
                 prefix += '.';
@@ -140,19 +140,19 @@ void Config::parse_file_content(std::string_view content, bool allow_unknown)
             continue;
         }
 
-        char const* key_begin = ptr;
+        const char* key_begin = ptr;
         while (!(is_endline(ptr) || *ptr == '='))
             ++ptr;
-        char const* key_end = ptr;
+        const char* key_end = ptr;
         std::string key{key_begin, key_end};
 
         std::string value;
         if (ptr < end && *ptr == '=') {
             ++ptr;
-            char const* value_begin = ptr;
+            const char* value_begin = ptr;
             while (!is_endline(ptr))
                 ++ptr;
-            char const* value_end = ptr;
+            const char* value_end = ptr;
             value = {value_begin, value_end};
         }
         else
@@ -167,7 +167,7 @@ std::string Config::dump(std::string_view prefix) const
     std::vector<std::pair<std::string, std::string>> options(options_.begin(), options_.end());
     std::sort(options.begin(), options.end());
     std::string output;
-    for (std::pair<std::string, std::string> const& option : options)
+    for (const std::pair<std::string, std::string>& option : options)
         output += fmt::format("{}{}={}\n", prefix, option.first, option.second);
     return output;
 }

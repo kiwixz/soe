@@ -10,10 +10,10 @@
 namespace utils {
 
 struct Config {
-    [[nodiscard]] bool contains(std::string const& key) const;
-    [[nodiscard]] std::string const& get_raw(std::string const& key) const;
+    [[nodiscard]] bool contains(const std::string& key) const;
+    [[nodiscard]] const std::string& get_raw(const std::string& key) const;
 
-    void remove(std::string const& key);
+    void remove(const std::string& key);
     void clear();
 
     /// Parse command-line arguments (and config file if explicitly given).
@@ -22,16 +22,16 @@ struct Config {
     bool parse_args(int& argc, char** argv, bool allow_unknown = false);
 
     void parse_global_config(std::string_view app_name, bool allow_unknown = false);
-    void parse_file(std::filesystem::path const& path, bool allow_unknown = false);
+    void parse_file(const std::filesystem::path& path, bool allow_unknown = false);
     void parse_file_content(std::string_view content, bool allow_unknown = false);
     [[nodiscard]] std::string dump(std::string_view prefix) const;
     void show_help(std::string_view app_name, std::string_view pos_args = "") const;
 
     template <typename T>
-    [[nodiscard]] T get(std::string const& key) const;
+    [[nodiscard]] T get(const std::string& key) const;
 
     template <typename T>
-    void get(std::string const& key, T& value) const;
+    void get(const std::string& key, T& value) const;
 
     template <typename T>
     void set(std::string key, T&& value);
@@ -44,9 +44,9 @@ private:
 
 
 template <typename T>
-T Config::get(std::string const& key) const
+T Config::get(const std::string& key) const
 {
-    std::string const& value = get_raw(key);
+    const std::string& value = get_raw(key);
     if constexpr (std::is_same_v<T, bool>) {
         if (value == "true" || value == "1")
             return true;
@@ -79,7 +79,7 @@ T Config::get(std::string const& key) const
 }
 
 template <typename T>
-void Config::get(std::string const& key, T& value) const
+void Config::get(const std::string& key, T& value) const
 {
     value = get<T>(key);
 }

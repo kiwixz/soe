@@ -25,7 +25,7 @@ uint8_t* PictureYV12::y()
 {
     return data_.data();
 }
-uint8_t const* PictureYV12::y() const
+const uint8_t* PictureYV12::y() const
 {
     return data_.data();
 }
@@ -34,7 +34,7 @@ uint8_t* PictureYV12::u()
 {
     return u_;
 }
-uint8_t const* PictureYV12::u() const
+const uint8_t* PictureYV12::u() const
 {
     return u_;
 }
@@ -43,7 +43,7 @@ uint8_t* PictureYV12::v()
 {
     return v_;
 }
-uint8_t const* PictureYV12::v() const
+const uint8_t* PictureYV12::v() const
 {
     return v_;
 }

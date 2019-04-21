@@ -14,8 +14,8 @@ struct ThreadPool {
     ThreadPool() = default;
     explicit ThreadPool(size_t nr_threads);
     ~ThreadPool();
-    ThreadPool(ThreadPool const&) = delete;
-    ThreadPool& operator=(ThreadPool const&) = delete;
+    ThreadPool(const ThreadPool&) = delete;
+    ThreadPool& operator=(const ThreadPool&) = delete;
     ThreadPool(ThreadPool&&) = delete;
     ThreadPool& operator=(ThreadPool&&) = delete;
 

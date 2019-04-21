@@ -16,8 +16,8 @@ struct [[nodiscard]] ScopeExit {
     ScopeExit() = default;
     explicit ScopeExit(Function function);
     ~ScopeExit();
-    ScopeExit(ScopeExit const&) = delete;
-    ScopeExit& operator=(ScopeExit const&) = delete;
+    ScopeExit(const ScopeExit &) = delete;
+    ScopeExit& operator=(const ScopeExit &) = delete;
     ScopeExit(ScopeExit&& other) noexcept;
     ScopeExit& operator=(ScopeExit&& other) noexcept;
 
