@@ -16,8 +16,8 @@ struct ThreadPool {
     ~ThreadPool();
     ThreadPool(const ThreadPool&) = delete;
     ThreadPool& operator=(const ThreadPool&) = delete;
-    ThreadPool(ThreadPool&&) = delete;
-    ThreadPool& operator=(ThreadPool&&) = delete;
+    ThreadPool(ThreadPool&&) noexcept = delete;
+    ThreadPool& operator=(ThreadPool&&) noexcept = delete;
 
     [[nodiscard]] size_t size() const;
     void extend(size_t nr_threads);
