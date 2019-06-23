@@ -18,7 +18,7 @@ vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS
-        -DBUILD_LIST=videoio
+        -DBUILD_LIST=video,videoio
         -DWITH_JASPER=OFF
         -DWITH_JPEG=OFF
         -DWITH_OPENEXR=OFF
