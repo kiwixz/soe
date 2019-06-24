@@ -13,6 +13,10 @@ file(GLOB_RECURSE test_src "*.test.cpp")
 test_cpp_target("${target}" "${test_src}")
 
 
+find_package("OpenCV" CONFIG REQUIRED "video")
+
 target_link_libraries("${target}"
     "utils"
+
+    "${OpenCV_LIBS}"
 )

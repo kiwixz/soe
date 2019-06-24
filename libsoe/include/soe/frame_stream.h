@@ -23,6 +23,7 @@ private:
 
     Frame frame_a_;
     Frame frame_b_;
+    cv::Mat last_flow_;
     int frames_count_ = 0;
 };
 

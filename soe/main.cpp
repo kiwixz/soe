@@ -20,7 +20,8 @@ void main_impl(int argc, char** argv)
 {
     utils::Config conf;
     conf.set("codec", "HFYU");
-    conf.set("fps", "60");
+    conf.set("fps", "60.0");
+    conf.set("speed", "1.0");
 
     conf.parse_global_config("soe");
     if (conf.parse_args(argc, argv) || argc != 3) {
@@ -34,20 +35,23 @@ void main_impl(int argc, char** argv)
     if (!reader.open(input_file))
         throw utils::Exception{"could not open source video '{}' (codec/container may be unsupported)", input_file};
 
-    auto out_fps = conf.get<double>("fps");
+    auto out_video_fps = conf.get<double>("fps");
+    auto out_fps = out_video_fps / conf.get<double>("speed");
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
                         static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
 
     cv::VideoWriter writer;
-    if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_fps, frame_size))
+    if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_video_fps, frame_size))
         throw utils::Exception{"could not open destination video '{}' (codec/container may be unsupported)", output_file};
 
     FrameStream stream{out_fps};
-    cv::Mat frame;
-    while (reader.read(frame)) {                                                           // NOLINT(bugprone-use-after-move, hicpp-invalid-access-moved)
-        stream.input_frame({std::move(frame), reader.get(cv::CAP_PROP_POS_MSEC) / 1000});  // NOLINT(clang-analyzer-cplusplus.Move)
+    FrameStream::Frame frame;
+    frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
+    while (reader.read(frame.picture)) {       // NOLINT(bugprone-use-after-move, hicpp-invalid-access-moved)
+        stream.input_frame(std::move(frame));  // NOLINT(clang-analyzer-cplusplus.Move)
         while (stream.has_output())
             writer.write(stream.output_frame().picture);
+        frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
     }
 }
 
