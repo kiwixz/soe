@@ -34,7 +34,7 @@ void main_impl(int argc, char** argv)
     if (!reader.open(input_file))
         throw utils::Exception{"could not open source video '{}' (codec/container may be unsupported)", input_file};
 
-    double out_fps = conf.get<double>("fps");
+    auto out_fps = conf.get<double>("fps");
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
                         static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
 
@@ -44,8 +44,8 @@ void main_impl(int argc, char** argv)
 
     FrameStream stream{out_fps};
     cv::Mat frame;
-    while (reader.read(frame)) {
-        stream.input_frame({std::move(frame), reader.get(cv::CAP_PROP_POS_MSEC) / 1000});
+    while (reader.read(frame)) {                                                           // NOLINT(bugprone-use-after-move, hicpp-invalid-access-moved)
+        stream.input_frame({std::move(frame), reader.get(cv::CAP_PROP_POS_MSEC) / 1000});  // NOLINT(clang-analyzer-cplusplus.Move)
         while (stream.has_output())
             writer.write(stream.output_frame().picture);
     }

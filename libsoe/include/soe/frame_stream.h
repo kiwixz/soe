@@ -13,9 +13,9 @@ struct FrameStream {
     FrameStream() = default;
     explicit FrameStream(double target_fps);
 
-    void input_frame(Frame frame);
+    [[nodiscard]] bool has_output() const;
 
-    bool has_output() const;
+    void input_frame(Frame frame);
     Frame output_frame();
 
 private:
