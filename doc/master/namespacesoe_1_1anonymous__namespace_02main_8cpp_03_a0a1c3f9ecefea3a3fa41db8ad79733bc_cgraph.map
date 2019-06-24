@@ -1,11 +1,13 @@
 <map id="soe::anonymous_namespace{main::cpp}::main_impl" name="soe::anonymous_namespace{main::cpp}::main_impl">
-<area shape="rect" id="node1" title=" " alt="" coords="5,141,268,182"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,191,268,233"/>
 <area shape="rect" id="node2" href="$structutils_1_1_config.html#ab48651341ab189a185bb4a995703deeb" title=" " alt="" coords="351,5,553,32"/>
 <area shape="rect" id="node3" href="$structutils_1_1_config.html#a721b70a9e01d9b680b6976b2d25ef26d" title=" " alt="" coords="341,57,563,98"/>
 <area shape="rect" id="node8" href="$structutils_1_1_config.html#af1e5a2746bab1560d5f0fb7c1a50b939" title=" " alt="" coords="316,123,588,149"/>
 <area shape="rect" id="node9" href="$structutils_1_1_config.html#a08878c232b78de572a701258e234e0ca" title=" " alt="" coords="321,173,583,200"/>
-<area shape="rect" id="node11" href="$namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html#a4778e772620621fd2654514d839cae12" title=" " alt="" coords="316,225,588,266"/>
-<area shape="rect" id="node12" href="$structutils_1_1_config.html#ad8dbc16f40140649ec5e01964d70cbd3" title=" " alt="" coords="331,291,573,317"/>
+<area shape="rect" id="node11" href="$structutils_1_1_config.html#a934b0d1f82647c9a599e6a928d9fe2a7" title=" " alt="" coords="351,224,553,251"/>
+<area shape="rect" id="node12" href="$structutils_1_1_config.html#ad8dbc16f40140649ec5e01964d70cbd3" title=" " alt="" coords="651,249,893,276"/>
+<area shape="rect" id="node13" href="$namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html#a4778e772620621fd2654514d839cae12" title=" " alt="" coords="316,326,588,367"/>
+<area shape="rect" id="node14" href="$structsoe_1_1_frame_stream.html#a6d42a02785fe83aba31d2e83152bf0ad" title=" " alt="" coords="326,391,578,433"/>
 <area shape="rect" id="node4" href="$structutils_1_1_config.html#a459561479c9c1ad0816a6ea6de85fd1f" title=" " alt="" coords="636,68,908,95"/>
 <area shape="rect" id="node7" href="$namespaceutils.html#a5064b3980eb7aa98e3daf3bb12b3c3d8" title=" " alt="" coords="651,17,893,44"/>
 <area shape="rect" id="node5" href="$structutils_1_1_config.html#ab5ca15af8b27ceafb626caf6080cc147" title=" " alt="" coords="956,57,1179,98"/>

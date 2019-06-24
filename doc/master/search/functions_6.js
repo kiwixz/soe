@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main',['main',['../namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html#af669b3519bb5e7bf1085235bfc8c43cd',1,'soe::anonymous_namespace{main.cpp}::main()'],['../main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main():&#160;main.cpp']]],
-  ['main_5fimpl',['main_impl',['../namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html#a0a1c3f9ecefea3a3fa41db8ad79733bc',1,'soe::anonymous_namespace{main.cpp}']]]
+  ['has_5foutput',['has_output',['../structsoe_1_1_frame_stream.html#a20414d3c2870c89512f9ec0884e20efd',1,'soe::FrameStream']]],
+  ['height',['height',['../structsoe_1_1_picture_y_v12.html#a546cc1769d8cb6f46c9591debfa32c98',1,'soe::PictureYV12']]]
 ];
