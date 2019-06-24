@@ -1,3 +1,4 @@
+#include "soe/frame_stream.h"
 #include "utils/config.h"
 #include <opencv2/videoio.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
@@ -19,6 +20,7 @@ void main_impl(int argc, char** argv)
 {
     utils::Config conf;
     conf.set("codec", "HFYU");
+    conf.set("fps", "60");
 
     conf.parse_global_config("soe");
     if (conf.parse_args(argc, argv) || argc != 3) {
@@ -32,7 +34,7 @@ void main_impl(int argc, char** argv)
     if (!reader.open(input_file))
         throw utils::Exception{"could not open source video '{}' (codec/container may be unsupported)", input_file};
 
-    double out_fps = reader.get(cv::CAP_PROP_FPS);
+    double out_fps = conf.get<double>("fps");
     cv::Size frame_size{static_cast<int>(reader.get(cv::CAP_PROP_FRAME_WIDTH)),
                         static_cast<int>(reader.get(cv::CAP_PROP_FRAME_HEIGHT))};
 
@@ -40,9 +42,12 @@ void main_impl(int argc, char** argv)
     if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_fps, frame_size))
         throw utils::Exception{"could not open destination video '{}' (codec/container may be unsupported)", output_file};
 
+    FrameStream stream{out_fps};
     cv::Mat frame;
     while (reader.read(frame)) {
-        writer.write(frame);
+        stream.input_frame({std::move(frame), reader.get(cv::CAP_PROP_POS_MSEC) / 1000});
+        while (stream.has_output())
+            writer.write(stream.output_frame().picture);
     }
 }
 
