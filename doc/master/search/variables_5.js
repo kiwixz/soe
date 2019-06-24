@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['options_5f',['options_',['../structutils_1_1_config.html#a4fdd53aa6ee9dc4f580fe1ae90b01010',1,'utils::Config']]]
+  ['last_5fflow_5f',['last_flow_',['../structsoe_1_1_frame_stream.html#adaf50645551687f2be3046ac607d9016',1,'soe::FrameStream']]]
 ];
