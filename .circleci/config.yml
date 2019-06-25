@@ -60,7 +60,7 @@ jobs:
           command: |
             mkdir -p "build/debug"
             cd "build/debug"
-            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Debug" "../.."
+            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Debug" -D "ENABLE_CUDA=OFF" "../.."
             ninja
             ctest --output-on-failure -E "check_.*"
       - run:
@@ -71,7 +71,7 @@ jobs:
           command: |
             mkdir -p "build/release"
             cd "build/release"
-            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Release" "../.."
+            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Release" -D "ENABLE_CUDA=OFF" "../.."
             ninja
             ctest --output-on-failure -E "check_.*"
       - run:

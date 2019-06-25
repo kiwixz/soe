@@ -6,6 +6,11 @@ set(target "libsoe")
 file(GLOB_RECURSE src "*.cpp")
 list(FILTER src EXCLUDE REGEX ".test.cpp$")
 
+if (ENABLE_CUDA)
+    file(GLOB_RECURSE src_cuda "*.cu")
+    list (APPEND src "${src_cuda}")
+endif ()
+
 add_library("${target}" "${src}")
 target_include_directories("${target}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
