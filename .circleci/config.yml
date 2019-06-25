@@ -54,6 +54,7 @@ jobs:
       - run:
           name: Test debug
           environment:
+            CUDACXX: /opt/cuda/bin/nvcc
             CXXFLAGS: -fdiagnostics-color=always -Werror
             LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
             ASAN_OPTIONS: check_initialization_order=1
@@ -67,6 +68,7 @@ jobs:
       - run:
           name: Test release
           environment:
+            CUDACXX: /opt/cuda/bin/nvcc
             CXXFLAGS: -fdiagnostics-color=always -Werror
             LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
           command: |
