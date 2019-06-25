@@ -33,8 +33,9 @@ FrameStream::Frame FrameStream::output_frame()
 
     double t = (frame.timestamp - frame_a_.timestamp) / (frame_b_.timestamp - frame_a_.timestamp);  // how close of frame_b_ we are [0;1]
 
-    cv::Mat from, to;
+    cv::Mat from;
     cv::cvtColor(frame_a_.picture, from, cv::COLOR_BGR2GRAY);
+    cv::Mat to;
     cv::cvtColor(frame_b_.picture, to, cv::COLOR_BGR2GRAY);
     if (last_flow_.size() != from.size())
         last_flow_ = {from.size(), CV_32FC2};

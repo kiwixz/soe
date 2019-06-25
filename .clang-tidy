@@ -6,6 +6,7 @@ Checks: "*  ,\
   -fuchsia-*  ,\
   \
   -bugprone-integer-division  ,\
+  -bugprone-use-after-move  ,\
   \
   -cppcoreguidelines-avoid-magic-numbers  ,\
   -cppcoreguidelines-pro-bounds-constant-array-index  ,\
@@ -23,6 +24,7 @@ Checks: "*  ,\
   -google-runtime-references  ,\
   \
   -hicpp-braces-around-statements  ,\
+  -hicpp-invalid-access-moved  ,\
   -hicpp-member-init  ,\
   -hicpp-signed-bitwise  ,\
   -hicpp-vararg  ,\
@@ -42,6 +44,8 @@ HeaderFilterRegex: ".*"
 AnalyzeTemporaryDtors: false
 FormatStyle: none
 CheckOptions:
+  - key: hicpp-move-const-arg.CheckTriviallyCopyableMove
+    value: 0
   - key: performance-move-const-arg.CheckTriviallyCopyableMove
     value: 0
   - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic

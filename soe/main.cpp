@@ -48,11 +48,11 @@ void main_impl(int argc, char** argv)
     FrameStream stream{{out_fps, conf.get<double>("flow.poly_sigma")}};
     FrameStream::Frame frame;
     frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
-    while (reader.read(frame.picture)) {  // NOLINT(bugprone-use-after-move, hicpp-invalid-access-moved)
+    while (reader.read(frame.picture)) {
         fmt::print("Analyzing frame {}/{}...\r",
                    static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
                    static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
-        stream.input_frame(std::move(frame));  // NOLINT(clang-analyzer-cplusplus.Move)
+        stream.input_frame(std::move(frame));
         while (stream.has_output())
             writer.write(stream.output_frame().picture);
         frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
