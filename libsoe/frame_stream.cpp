@@ -28,7 +28,7 @@ void FrameStream::input_frame(Frame frame)
 
 FrameStream::Frame FrameStream::output_frame()
 {
-    FrameStream::Frame frame;
+    Frame frame;
     frame.timestamp = frames_count_ / settings_.target_fps;
 
     double t = (frame.timestamp - frame_a_.timestamp) / (frame_b_.timestamp - frame_a_.timestamp);  // how close of frame_b_ we are [0;1]
