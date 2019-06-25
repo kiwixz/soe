@@ -22,6 +22,7 @@ void main_impl(int argc, char** argv)
     conf.set("codec", "HFYU");
     conf.set("fps", "60.0");
     conf.set("speed", "1.0");
+    conf.set("flow.poly_sigma", "0.5");
 
     conf.parse_global_config("soe");
     if (conf.parse_args(argc, argv) || argc != 3) {
@@ -44,7 +45,7 @@ void main_impl(int argc, char** argv)
     if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_video_fps, frame_size))
         throw utils::Exception{"could not open destination video '{}' (codec/container may be unsupported)", output_file};
 
-    FrameStream stream{out_fps};
+    FrameStream stream{{out_fps, conf.get<double>("flow.poly_sigma")}};
     FrameStream::Frame frame;
     frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
     while (reader.read(frame.picture)) {  // NOLINT(bugprone-use-after-move, hicpp-invalid-access-moved)

@@ -10,8 +10,13 @@ struct FrameStream {
         double timestamp;
     };
 
+    struct Settings {
+        double target_fps = 60.0;
+        double poly_sigma = .5;
+    };
+
     FrameStream() = default;
-    explicit FrameStream(double target_fps);
+    explicit FrameStream(Settings settings);
 
     [[nodiscard]] bool has_output() const;
 
@@ -19,7 +24,7 @@ struct FrameStream {
     Frame output_frame();
 
 private:
-    double target_fps_;
+    Settings settings_;
 
     Frame frame_a_;
     Frame frame_b_;
