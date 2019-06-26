@@ -29,7 +29,7 @@ void flow_to_map(const cv::cuda::GpuMat& flow,
     dim3 threads{64, 16};
     dim3 blocks{static_cast<unsigned>(std::ceil(flow.size().width / static_cast<double>(threads.x))),
                 static_cast<unsigned>(std::ceil(flow.size().height / static_cast<double>(threads.y)))};
-    flow_to_map_kernel<<<blocks, threads>>>(flow, x_map, y_map, t);
+    flow_to_map_kernel<<<blocks, threads>>>(flow, x_map, y_map, static_cast<float>(t));
 }
 
 }  // namespace cuda
