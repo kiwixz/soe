@@ -1,6 +1,7 @@
 var searchData=
 [
   ['anonymous_5fnamespace_7bmain_2ecpp_7d',['anonymous_namespace{main.cpp}',['../namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html',1,'soe']]],
+  ['cuda',['cuda',['../namespacesoe_1_1cuda.html',1,'soe']]],
   ['soe',['soe',['../index.html',1,'']]],
   ['scope_5fexit_2eh',['scope_exit.h',['../scope__exit_8h.html',1,'']]],
   ['scope_5fexit_2etest_2ecpp',['scope_exit.test.cpp',['../scope__exit_8test_8cpp.html',1,'']]],
