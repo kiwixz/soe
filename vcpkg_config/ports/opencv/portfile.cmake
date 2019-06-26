@@ -14,11 +14,21 @@ vcpkg_from_github(
         "${CMAKE_CURRENT_LIST_DIR}/0003-fix-compilation.patch"
 )
 
+vcpkg_from_github(
+    OUT_SOURCE_PATH EXTRA_SOURCE_PATH
+    REPO opencv/opencv_contrib
+    REF 4.1.0
+    SHA512 68b373dcb149891847927709bd4409711d74adc65c6c79e8d91c61eee673a4a2304535868d7f54324ac6156b2bec9608d4f9c8f24b3378d43893b0734e116c35
+    HEAD_REF master
+)
+
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
     OPTIONS
-        -DBUILD_LIST=video,videoio
+        -DBUILD_LIST=video,videoio,cudaimgproc,cudaoptflow,cudawarping,cudev,highgui
+        -DWITH_CUDA=ON
+
         -DWITH_JASPER=OFF
         -DWITH_JPEG=OFF
         -DWITH_OPENEXR=OFF
@@ -27,9 +37,11 @@ vcpkg_configure_cmake(
         -DWITH_TIFF=OFF
         -DWITH_WEBP=OFF
 
+        -DOPENCV_EXTRA_MODULES_PATH=${EXTRA_SOURCE_PATH}/modules
         -DBUILD_opencv_apps=OFF
         -DBUILD_PERF_TESTS=OFF
         -DBUILD_TESTS=OFF
+
         -DWITH_IPP=ON  # force it so debug has same number of libs
 
         # provided by vcpkg

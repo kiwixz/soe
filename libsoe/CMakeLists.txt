@@ -18,7 +18,7 @@ file(GLOB_RECURSE test_src "*.test.cpp")
 test_cpp_target("${target}" "${test_src}")
 
 
-find_package("OpenCV" CONFIG REQUIRED "video")
+find_package("OpenCV" CONFIG REQUIRED "cudaimgproc" "cudaoptflow" "cudawarping" "video")
 
 target_link_libraries("${target}"
     "utils"

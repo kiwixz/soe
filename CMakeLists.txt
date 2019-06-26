@@ -4,24 +4,19 @@ set(CMAKE_BUILD_TYPE "Release" CACHE STRING "")
 set(CMAKE_CXX_COMPILER "clang++" CACHE FILEPATH "")
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE FILEPATH "")
 
-project("soe" CXX)
+project("soe" CUDA CXX)
 
 option(BUILD_TESTS "Build tests" ON)
 option(NATIVE_OPTIMIZATION "Perform optimizations specific to current machine" ON)
 
-option(ENABLE_CUDA "Enable GPU acceleration" ON)
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CUDA_EXTENSIONS OFF)
+set(CMAKE_CUDA_STANDARD 14)
+set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (ENABLE_CUDA)
-    enable_language(CUDA)
-    set(CMAKE_CUDA_EXTENSIONS OFF)
-    set(CMAKE_CUDA_STANDARD 14)
-    set(CMAKE_CUDA_STANDARD_REQUIRED ON)
-endif ()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS

@@ -1,4 +1,5 @@
 #include "soe/frame_stream.h"
+#include "soe/frame_stream_cuda.h"
 #include "utils/config.h"
 #include <opencv2/videoio.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
@@ -20,6 +21,7 @@ void main_impl(int argc, char** argv)
 {
     utils::Config conf;
     conf.set("codec", "HFYU");
+    conf.set("cuda", "true");
     conf.set("fps", "60.0");
     conf.set("speed", "1.0");
     conf.set("flow.poly_sigma", "0.5");
@@ -45,6 +47,7 @@ void main_impl(int argc, char** argv)
     if (!writer.open(output_file, parse_fourcc(conf.get_raw("codec")), out_video_fps, frame_size))
         throw utils::Exception{"could not open destination video '{}' (codec/container may be unsupported)", output_file};
 
+#if 0
     FrameStream stream{{out_fps, conf.get<double>("flow.poly_sigma")}};
     FrameStream::Frame frame;
     frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
@@ -55,6 +58,25 @@ void main_impl(int argc, char** argv)
         stream.input_frame(std::move(frame));
         while (stream.has_output())
             writer.write(stream.output_frame().picture);
+        frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
+    }
+#endif
+
+    FrameStreamCuda stream{{out_fps, conf.get<double>("flow.poly_sigma")}};
+    cv::Mat frame_cpu;
+    FrameStreamCuda::Frame frame;
+    frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
+    while (reader.read(frame_cpu)) {
+        fmt::print("Analyzing frame {}/{}...\r",
+                   static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
+                   static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
+        frame.picture.upload(frame_cpu);
+        stream.input_frame(std::move(frame));
+        while (stream.has_output()) {
+            FrameStreamCuda::Frame out_frame = stream.output_frame();
+            out_frame.picture.download(frame_cpu);
+            writer.write(frame_cpu);
+        }
         frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
     }
 }
