@@ -20,8 +20,7 @@ jobs:
           name: Install system dependencies
           command: |
             pacman --color=always --needed --noconfirm -Sy  \
-                awk yasm  `# opencv (ffmpeg)`  \
-                cuda  `# opencv (extra)`
+                awk yasm  `# opencv (ffmpeg)`
       - save_cache:
           name: Save pacman cache
           key: packages-0-{{ .Branch }}-{{ .Revision }}
@@ -54,7 +53,6 @@ jobs:
       - run:
           name: Test debug
           environment:
-            CUDACXX: /opt/cuda/bin/nvcc
             CXXFLAGS: -fdiagnostics-color=always -Werror
             LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
             ASAN_OPTIONS: check_initialization_order=1
@@ -62,19 +60,18 @@ jobs:
           command: |
             mkdir -p "build/debug"
             cd "build/debug"
-            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Debug" "../.."
+            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Debug" -D "ENABLE_CUDA=OFF" "../.."
             ninja
             ctest --output-on-failure -E "check_.*"
       - run:
           name: Test release
           environment:
-            CUDACXX: /opt/cuda/bin/nvcc
             CXXFLAGS: -fdiagnostics-color=always -Werror
             LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
           command: |
             mkdir -p "build/release"
             cd "build/release"
-            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Release" "../.."
+            cmake -G Ninja -D "CMAKE_BUILD_TYPE=Release" -D "ENABLE_CUDA=OFF" "../.."
             ninja
             ctest --output-on-failure -E "check_.*"
       - run:
