@@ -70,7 +70,7 @@ void main_impl(int argc, char** argv)
         fmt::print("Analyzing frame {}/{}...\r",
                    static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
                    static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
-        frame.picture.upload(frame_cpu);
+        frame.picture = cv::cuda::GpuMat{frame_cpu};  // GpuMat is like a shared_ptr without move, so we must create another one
         stream.input_frame(std::move(frame));
         while (stream.has_output()) {
             FrameStreamCuda::Frame out_frame = stream.output_frame();

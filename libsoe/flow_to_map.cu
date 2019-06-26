@@ -4,25 +4,19 @@ namespace soe {
 namespace cuda {
 namespace {
 
-__global__ void flow_to_map_kernel(const cv::cuda::PtrStepSzf flow,
+__global__ void flow_to_map_kernel(const cv::cuda::PtrStepSz<float2> flow,
                                    cv::cuda::PtrStepSzf x_map, cv::cuda::PtrStepSzf y_map,
-                                   float t, int pixels_per_thread)
+                                   float t)
 {
-    int base_x = threadIdx.x * pixels_per_thread;
-    int y = blockIdx.x;
+    int x = blockIdx.x * blockDim.x + threadIdx.x;
+    int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-    int next_thread_x = base_x + pixels_per_thread;
-    if (next_thread_x - 1 > flow.cols)
+    if (x >= flow.cols || y >= flow.rows)
         return;
 
-    const float* flow_row = flow.ptr(y);
-    float* x_map_row = x_map.ptr(y);
-    float* y_map_row = y_map.ptr(y);
-
-    for (int x = base_x; x < next_thread_x; ++x) {
-        x_map_row[x] = x + flow_row[x * 2 + 0] * t;
-        y_map_row[x] = y + flow_row[x * 2 + 1] * t;
-    }
+    float2 flow_xy = flow(y, x);
+    x_map(y, x) = x + flow_xy.x * t;
+    y_map(y, x) = y + flow_xy.y * t;
 }
 
 }  // namespace
@@ -32,12 +26,10 @@ void flow_to_map(const cv::cuda::GpuMat& flow,
                  cv::cuda::GpuMat& x_map, cv::cuda::GpuMat& y_map,
                  double t)
 {
-    int nr_threads = flow.cols;
-    while (nr_threads > 1024)
-        nr_threads /= 2;
-
-    int pixels_per_thread = flow.cols / nr_threads;
-    flow_to_map_kernel<<<flow.rows, nr_threads>>>(flow, x_map, y_map, t, pixels_per_thread);
+    dim3 threads{64, 16};
+    dim3 blocks{static_cast<unsigned>(std::ceil(flow.size().width / static_cast<double>(threads.x))),
+                static_cast<unsigned>(std::ceil(flow.size().height / static_cast<double>(threads.y)))};
+    flow_to_map_kernel<<<blocks, threads>>>(flow, x_map, y_map, t);
 }
 
 }  // namespace cuda
