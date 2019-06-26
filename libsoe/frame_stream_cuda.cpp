@@ -2,22 +2,23 @@
 #include "soe/flow_to_map.h"
 #include <opencv2/cudaimgproc.hpp>
 #include <opencv2/cudawarping.hpp>
-#include <opencv2/video/tracking.hpp>
 
 namespace soe {
 
-FrameStreamCuda::FrameStreamCuda() :
-    FrameStreamCuda{{}}
-{}
-
-FrameStreamCuda::FrameStreamCuda(Settings settings) :
-    settings_{std::move(settings)}
+FrameStreamCuda::FrameStreamCuda(double target_fps, FarnebackSettings settings) :
+    target_fps_{target_fps}
 {
     frame_a_.timestamp = -1;
     frame_b_.timestamp = -1;
 
-    farneback_ = cv::cuda::FarnebackOpticalFlow::create(5, .5, false, 13, 10, 5,
-                                                        settings_.poly_sigma, cv::OPTFLOW_USE_INITIAL_FLOW);
+    farneback_ = cv::cuda::FarnebackOpticalFlow::create(settings.num_levels,
+                                                        settings.pyr_scale,
+                                                        settings.fast_pyramids,
+                                                        settings.win_size,
+                                                        settings.num_iters,
+                                                        settings.poly_n,
+                                                        settings.poly_sigma,
+                                                        settings.flags);
 }
 
 bool FrameStreamCuda::has_output() const
@@ -25,7 +26,7 @@ bool FrameStreamCuda::has_output() const
     if (frame_a_.timestamp < 0)  // we dont have 2 frames yet
         return false;
 
-    double next_frame_ts = frames_count_ / settings_.target_fps;
+    double next_frame_ts = frames_count_ / target_fps_;
     return next_frame_ts < frame_b_.timestamp;
 }
 
@@ -38,7 +39,7 @@ void FrameStreamCuda::input_frame(Frame frame)
 FrameStreamCuda::Frame FrameStreamCuda::output_frame()
 {
     Frame frame;
-    frame.timestamp = frames_count_ / settings_.target_fps;
+    frame.timestamp = frames_count_ / target_fps_;
 
     double t = (frame.timestamp - frame_a_.timestamp) / (frame_b_.timestamp - frame_a_.timestamp);  // how close of frame_b_ we are [0;1]
 

@@ -1,18 +1,22 @@
 #include "soe/frame_stream.h"
 #include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/video/tracking.hpp>
 
 namespace soe {
 
-FrameStream::FrameStream() :
-    FrameStream{{}}
-{}
-
-FrameStream::FrameStream(Settings settings) :
-    settings_{std::move(settings)}
+FrameStream::FrameStream(double target_fps, FarnebackSettings settings) :
+    target_fps_{target_fps}
 {
     frame_a_.timestamp = -1;
     frame_b_.timestamp = -1;
+
+    farneback_ = cv::FarnebackOpticalFlow::create(settings.num_levels,
+                                                  settings.pyr_scale,
+                                                  settings.fast_pyramids,
+                                                  settings.win_size,
+                                                  settings.num_iters,
+                                                  settings.poly_n,
+                                                  settings.poly_sigma,
+                                                  settings.flags);
 }
 
 bool FrameStream::has_output() const
@@ -20,7 +24,7 @@ bool FrameStream::has_output() const
     if (frame_a_.timestamp < 0)  // we dont have 2 frames yet
         return false;
 
-    double next_frame_ts = frames_count_ / settings_.target_fps;
+    double next_frame_ts = frames_count_ / target_fps_;
     return next_frame_ts < frame_b_.timestamp;
 }
 
@@ -33,7 +37,7 @@ void FrameStream::input_frame(Frame frame)
 FrameStream::Frame FrameStream::output_frame()
 {
     Frame frame;
-    frame.timestamp = frames_count_ / settings_.target_fps;
+    frame.timestamp = frames_count_ / target_fps_;
 
     double t = (frame.timestamp - frame_a_.timestamp) / (frame_b_.timestamp - frame_a_.timestamp);  // how close of frame_b_ we are [0;1]
 
@@ -46,9 +50,7 @@ FrameStream::Frame FrameStream::output_frame()
         last_flow_ = {from.size(), CV_32FC2};
 
     // calculate backward dense optical flow
-    cv::calcOpticalFlowFarneback(to, from, last_flow_, .5, 3, 25, 3, 5,
-                                 settings_.poly_sigma,
-                                 cv::OPTFLOW_USE_INITIAL_FLOW);
+    farneback_->calc(to, from, last_flow_);
 
     cv::Mat map{last_flow_.size(), CV_32FC2};
     for (int y = 0; y < map.rows; ++y)

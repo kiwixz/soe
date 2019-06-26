@@ -1,5 +1,6 @@
 #pragma once
 
+#include "soe/farneback_settings.h"
 #include <opencv2/core/cuda.hpp>
 #include <opencv2/cudaoptflow.hpp>
 
@@ -16,8 +17,8 @@ struct FrameStreamCuda {
         double poly_sigma = .5;
     };
 
-    FrameStreamCuda();
-    explicit FrameStreamCuda(Settings settings);
+    FrameStreamCuda() = default;
+    FrameStreamCuda(double target_fps, FarnebackSettings settings);
 
     [[nodiscard]] bool has_output() const;
 
@@ -25,7 +26,7 @@ struct FrameStreamCuda {
     Frame output_frame();
 
 private:
-    Settings settings_;
+    double target_fps_;
 
     Frame frame_a_;
     Frame frame_b_;
