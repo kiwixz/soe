@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['settings_5f',['settings_',['../structsoe_1_1_frame_stream.html#a4f23b7840a8acbbbe4b829b1432e1fc9',1,'soe::FrameStream::settings_()'],['../structsoe_1_1_frame_stream_cuda.html#a9ce3b2ac1ff25422bc1f6705f3abebd4',1,'soe::FrameStreamCuda::settings_()']]],
-  ['state_5f',['state_',['../structutils_1_1_rand64.html#a57f5b5237f76c36b597f0a6ed02aad44',1,'utils::Rand64::state_()'],['../structutils_1_1_rand_f.html#a64c1b137ad9408c3839127b4170ceec0',1,'utils::RandF::state_()']]],
-  ['stopping_5f',['stopping_',['../structutils_1_1_thread_pool.html#a4bd5a27067e2069e42ba2d96d0835faa',1,'utils::ThreadPool']]]
+  ['picture',['picture',['../structsoe_1_1_frame_stream_1_1_frame.html#affaceb262e48ebc1cf072c943957dfd0',1,'soe::FrameStream::Frame::picture()'],['../structsoe_1_1_frame_stream_cuda_1_1_frame.html#a55130b422691d2d714e353f9ec35b40d',1,'soe::FrameStreamCuda::Frame::picture()']]],
+  ['poly_5fn',['poly_n',['../structsoe_1_1_farneback_settings.html#a98f8f096e79f64410d55eb2e022b63da',1,'soe::FarnebackSettings']]],
+  ['poly_5fsigma',['poly_sigma',['../structsoe_1_1_farneback_settings.html#a828ec5ffd15ea9fa1f92e2e7e6db6267',1,'soe::FarnebackSettings::poly_sigma()'],['../structsoe_1_1_frame_stream_1_1_settings.html#a4185002ad726a43702bfc8929cc37dfb',1,'soe::FrameStream::Settings::poly_sigma()'],['../structsoe_1_1_frame_stream_cuda_1_1_settings.html#a965e665377a9df0caa2eeaf204df5712',1,'soe::FrameStreamCuda::Settings::poly_sigma()']]],
+  ['pyr_5fscale',['pyr_scale',['../structsoe_1_1_farneback_settings.html#a60926c9d0c3ca269409695fefc443b15',1,'soe::FarnebackSettings']]]
 ];

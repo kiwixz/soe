@@ -1,13 +1,23 @@
 var searchData=
 [
-  ['target_5ffps',['target_fps',['../structsoe_1_1_frame_stream_1_1_settings.html#ae03f77efaa01daac4b9b39dfdb3d5dc2',1,'soe::FrameStream::Settings::target_fps()'],['../structsoe_1_1_frame_stream_cuda_1_1_settings.html#a730fd0580ebc864937cfad8550d13440',1,'soe::FrameStreamCuda::Settings::target_fps()']]],
-  ['tasks_5f',['tasks_',['../structutils_1_1_thread_pool.html#abea3c8537dc02e9918106704453de3cc',1,'utils::ThreadPool']]],
-  ['tasks_5fcondvar_5f',['tasks_condvar_',['../structutils_1_1_thread_pool.html#ae1ee75d1b00bd67f8f1549c474b6e71d',1,'utils::ThreadPool']]],
-  ['tasks_5fmutex_5f',['tasks_mutex_',['../structutils_1_1_thread_pool.html#a89d7a027203ef079078a65f67a4f21f0',1,'utils::ThreadPool']]],
-  ['test_5fsuite',['TEST_SUITE',['../namespaceutils_1_1test.html#ab33de35534fb940b5f0acbbd7826e290',1,'utils::test::TEST_SUITE(&quot;config&quot;)'],['../namespaceutils_1_1test.html#a46bd9929694675f29ac7dc420a0e25f3',1,'utils::test::TEST_SUITE(&quot;scope_exit&quot;)'],['../namespaceutils_1_1test.html#a226d01c8ba4f6049e8b11769b32dc88d',1,'utils::test::TEST_SUITE(&quot;thread_pool&quot;)']]],
-  ['thread_5fpool_2ecpp',['thread_pool.cpp',['../thread__pool_8cpp.html',1,'']]],
-  ['thread_5fpool_2eh',['thread_pool.h',['../thread__pool_8h.html',1,'']]],
-  ['thread_5fpool_2etest_2ecpp',['thread_pool.test.cpp',['../thread__pool_8test_8cpp.html',1,'']]],
-  ['threadpool',['ThreadPool',['../structutils_1_1_thread_pool.html',1,'utils::ThreadPool'],['../structutils_1_1_thread_pool.html#ab7c5b7e96efacdb1dcdad5660023d082',1,'utils::ThreadPool::ThreadPool()=default'],['../structutils_1_1_thread_pool.html#ab4d69127d0f0ee7fc7dbfe73f9c05e66',1,'utils::ThreadPool::ThreadPool(size_t nr_threads)'],['../structutils_1_1_thread_pool.html#aa00e08e8f6891709f7f9047744c88e2b',1,'utils::ThreadPool::ThreadPool(const ThreadPool &amp;)=delete'],['../structutils_1_1_thread_pool.html#a1b00608d992f0f585e49f7058b3f3383',1,'utils::ThreadPool::ThreadPool(ThreadPool &amp;&amp;) noexcept=delete']]],
-  ['timestamp',['timestamp',['../structsoe_1_1_frame_stream_1_1_frame.html#a744af24f3283c2e6121b26726f114fd8',1,'soe::FrameStream::Frame::timestamp()'],['../structsoe_1_1_frame_stream_cuda_1_1_frame.html#a6ef6b1cf79c9f0c4175a62de1502e909',1,'soe::FrameStreamCuda::Frame::timestamp()']]]
+  ['anonymous_5fnamespace_7bmain_2ecpp_7d',['anonymous_namespace{main.cpp}',['../namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html',1,'soe']]],
+  ['cuda',['cuda',['../namespacesoe_1_1cuda.html',1,'soe']]],
+  ['soe',['soe',['../index.html',1,'']]],
+  ['scope_5fexit_2eh',['scope_exit.h',['../scope__exit_8h.html',1,'']]],
+  ['scope_5fexit_2etest_2ecpp',['scope_exit.test.cpp',['../scope__exit_8test_8cpp.html',1,'']]],
+  ['scopeexit',['ScopeExit',['../structutils_1_1_scope_exit.html',1,'utils::ScopeExit&lt; TFunction &gt;'],['../structutils_1_1_scope_exit.html#a819261840ec8da70baba1d9f34b2de99',1,'utils::ScopeExit::ScopeExit()=default'],['../structutils_1_1_scope_exit.html#a61c3a1018aed62014ca53f71e02e0493',1,'utils::ScopeExit::ScopeExit(Function function)'],['../structutils_1_1_scope_exit.html#a0b7af506b0aff51ca1e4756d053c3ace',1,'utils::ScopeExit::ScopeExit(const ScopeExit &amp;)=delete'],['../structutils_1_1_scope_exit.html#abf0224ced05a0bf04d481a691201cc43',1,'utils::ScopeExit::ScopeExit(ScopeExit &amp;&amp;other) noexcept']]],
+  ['scopeexitgeneric',['ScopeExitGeneric',['../namespaceutils.html#a1fe1bb0f736a869949b67870ec3afbd3',1,'utils']]],
+  ['set',['set',['../structutils_1_1_config.html#ab48651341ab189a185bb4a995703deeb',1,'utils::Config']]],
+  ['set_5fparsed_5foption',['set_parsed_option',['../structutils_1_1_config.html#a582f735328e8c0b4766654c6b8ccbacd',1,'utils::Config']]],
+  ['settings',['Settings',['../structsoe_1_1_frame_stream_1_1_settings.html',1,'soe::FrameStream::Settings'],['../structsoe_1_1_frame_stream_cuda_1_1_settings.html',1,'soe::FrameStreamCuda::Settings']]],
+  ['shared_5fhandle_2eh',['shared_handle.h',['../shared__handle_8h.html',1,'']]],
+  ['sharedcallable',['SharedCallable',['../structutils_1_1_thread_pool_1_1_shared_callable.html',1,'utils::ThreadPool::SharedCallable&lt; T &gt;'],['../structutils_1_1_thread_pool_1_1_shared_callable.html#ac4447f8ce866508f4330d7877fcf4e58',1,'utils::ThreadPool::SharedCallable::SharedCallable()']]],
+  ['sharedhandle',['SharedHandle',['../structutils_1_1_shared_handle.html',1,'utils::SharedHandle&lt; TInit, TCleanup &gt;'],['../structutils_1_1_shared_handle.html#a4ed09382cf5fee23a1f69009212683fb',1,'utils::SharedHandle::SharedHandle()']]],
+  ['show_5fhelp',['show_help',['../structutils_1_1_config.html#a08878c232b78de572a701258e234e0ca',1,'utils::Config']]],
+  ['size',['size',['../structutils_1_1_thread_pool.html#a297cc6df40cd2f62d6e16e48ebae3b83',1,'utils::ThreadPool']]],
+  ['soe',['soe',['../namespacesoe.html',1,'']]],
+  ['state_5f',['state_',['../structutils_1_1_rand64.html#a57f5b5237f76c36b597f0a6ed02aad44',1,'utils::Rand64::state_()'],['../structutils_1_1_rand_f.html#a64c1b137ad9408c3839127b4170ceec0',1,'utils::RandF::state_()']]],
+  ['static_5funique_5fptr_5fcast',['static_unique_ptr_cast',['../namespaceutils.html#a754cac7672598c03d3426239ffa9f1ed',1,'utils']]],
+  ['stopping_5f',['stopping_',['../structutils_1_1_thread_pool.html#a4bd5a27067e2069e42ba2d96d0835faa',1,'utils::ThreadPool']]],
+  ['submit',['submit',['../structutils_1_1_thread_pool.html#a6dc05ce6a612b778a5140c08b8f3632d',1,'utils::ThreadPool']]]
 ];
