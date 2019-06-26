@@ -1,7 +1,9 @@
 #include "soe/frame_stream_cuda.h"
+#include "soe/flow_to_map.h"
 #include <opencv2/cudaimgproc.hpp>
 #include <opencv2/cudaoptflow.hpp>
 #include <opencv2/cudawarping.hpp>
+#include <opencv2/video/tracking.hpp>
 
 namespace soe {
 
@@ -42,26 +44,15 @@ FrameStreamCuda::Frame FrameStreamCuda::output_frame()
         last_flow_ = {from.size(), CV_32FC2};
 
     // calculate backward dense optical flow
-    cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback = cv::cuda::FarnebackOpticalFlow::create(5, .5, false, 13, 10, 5, 1.1, 0);
+    cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback = cv::cuda::FarnebackOpticalFlow::create(5, .5, false, 13, 10, 5,
+                                                                                               settings_.poly_sigma, cv::OPTFLOW_USE_INITIAL_FLOW);
     farneback->calc(to, from, last_flow_);
 
-    //cv::calcOpticalFlowFarneback(to, from, last_flow_, .5, 3, 25, 3, 5,
-    //                             settings_.poly_sigma,
-    //                             cv::OPTFLOW_USE_INITIAL_FLOW);
+    cv::cuda::GpuMat x_map{from.size(), CV_32FC1};
+    cv::cuda::GpuMat y_map{from.size(), CV_32FC1};
+    cuda::flow_to_map(last_flow_, x_map, y_map, t);
 
-#if 0
-    cv::Mat map{last_flow_.size(), CV_32FC2};
-    for (int y = 0; y < map.rows; ++y)
-        for (int x = 0; x < map.cols; ++x) {
-            const auto& f = last_flow_.at<cv::Point2f>(y, x);
-            map.at<cv::Point2f>(y, x) = {static_cast<float>(x + f.x * t),
-                                         static_cast<float>(y + f.y * t)};
-        }
-#else
-    cv::cuda::GpuMat map = last_flow_;
-#endif
-
-    cv::cuda::remap(frame_a_.picture, frame.picture, map, {}, cv::INTER_NEAREST, cv::BORDER_REPLICATE);
+    cv::cuda::remap(frame_a_.picture, frame.picture, x_map, y_map, cv::INTER_NEAREST, cv::BORDER_REPLICATE);
 
     ++frames_count_;
     return frame;

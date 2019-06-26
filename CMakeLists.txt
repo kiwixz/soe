@@ -17,7 +17,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} -Weverything  \
@@ -31,7 +30,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
     endif ()
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /nologo /MP /diagnostics:caret /arch:AVX2 /W4 /permissive- /EHsc")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /nologo /MP /diagnostics:caret /W4 /permissive- /EHsc")
     set(CMAKE_CXX_FLAGS_DEBUG "/D DEBUG /MTd /JMC /RTC1 /ZI")
     set(CMAKE_CXX_FLAGS_RELEASE "/D NDEBUG /MT /O2 /GL /Gw /Zi /fp:fast")
     set(CMAKE_EXE_LINKER_FLAGS_DEBUG "/DEBUG:FASTLINK")
@@ -44,6 +43,10 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2")
     endif ()
 endif ()
+
+set(CMAKE_CUDA_FLAGS "-Xcompiler=\"${CMAKE_CXX_FLAGS} /permissive\"")
+set(CMAKE_CUDA_FLAGS_DEBUG "-Xcompiler=\"${CMAKE_CXX_FLAGS_DEBUG}\"")
+set(CMAKE_CUDA_FLAGS_RELEASE "-Xcompiler=\"${CMAKE_CXX_FLAGS_RELEASE}\"")
 
 enable_testing()
 find_package("Python3" COMPONENTS "Interpreter")
