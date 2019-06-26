@@ -63,37 +63,38 @@ void main_impl(int argc, char** argv)
                                          conf.get<int>("farneback.poly_n"),
                                          conf.get<double>("farneback.poly_sigma")};
 
-#if 0
-    FrameStream stream{{out_fps, conf.get<double>("flow.poly_sigma")}};
-    FrameStream::Frame frame;
-    frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
-    while (reader.read(frame.picture)) {
-        fmt::print("Analyzing frame {}/{}...\r",
-                   static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
-                   static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
-        stream.input_frame(std::move(frame));
-        while (stream.has_output())
-            writer.write(stream.output_frame().picture);
+    if (conf.get<bool>("cuda")) {
+        FrameStreamCuda stream{out_fps, farneback_settings};
+        cv::Mat frame_cpu;
+        FrameStreamCuda::Frame frame;
         frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
-    }
-#endif
-
-    FrameStreamCuda stream{out_fps, farneback_settings};
-    cv::Mat frame_cpu;
-    FrameStreamCuda::Frame frame;
-    frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
-    while (reader.read(frame_cpu)) {
-        fmt::print("Analyzing frame {}/{}...\r",
-                   static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
-                   static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
-        frame.picture = cv::cuda::GpuMat{frame_cpu};  // GpuMat is like a shared_ptr without move, so we must create another one
-        stream.input_frame(std::move(frame));
-        while (stream.has_output()) {
-            FrameStreamCuda::Frame out_frame = stream.output_frame();
-            out_frame.picture.download(frame_cpu);
-            writer.write(frame_cpu);
+        while (reader.read(frame_cpu)) {
+            fmt::print("Analyzing frame {}/{}...\r",
+                       static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
+                       static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
+            frame.picture = cv::cuda::GpuMat{frame_cpu};  // GpuMat is like a shared_ptr without move, so we must create another one
+            stream.input_frame(std::move(frame));
+            while (stream.has_output()) {
+                FrameStreamCuda::Frame out_frame = stream.output_frame();
+                out_frame.picture.download(frame_cpu);
+                writer.write(frame_cpu);
+            }
+            frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
         }
+    }
+    else {
+        FrameStream stream{out_fps, farneback_settings};
+        FrameStream::Frame frame;
         frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
+        while (reader.read(frame.picture)) {
+            fmt::print("Analyzing frame {}/{}...\r",
+                       static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
+                       static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
+            stream.input_frame(std::move(frame));
+            while (stream.has_output())
+                writer.write(stream.output_frame().picture);
+            frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
+        }
     }
 }
 
