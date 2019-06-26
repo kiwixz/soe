@@ -1,17 +1,23 @@
 #include "soe/frame_stream_cuda.h"
 #include "soe/flow_to_map.h"
 #include <opencv2/cudaimgproc.hpp>
-#include <opencv2/cudaoptflow.hpp>
 #include <opencv2/cudawarping.hpp>
 #include <opencv2/video/tracking.hpp>
 
 namespace soe {
+
+FrameStreamCuda::FrameStreamCuda() :
+    FrameStreamCuda{{}}
+{}
 
 FrameStreamCuda::FrameStreamCuda(Settings settings) :
     settings_{std::move(settings)}
 {
     frame_a_.timestamp = -1;
     frame_b_.timestamp = -1;
+
+    farneback_ = cv::cuda::FarnebackOpticalFlow::create(5, .5, false, 13, 10, 5,
+                                                        settings_.poly_sigma, cv::OPTFLOW_USE_INITIAL_FLOW);
 }
 
 bool FrameStreamCuda::has_output() const
@@ -40,13 +46,12 @@ FrameStreamCuda::Frame FrameStreamCuda::output_frame()
     cv::cuda::cvtColor(frame_a_.picture, from, cv::COLOR_BGR2GRAY);
     cv::cuda::GpuMat to;
     cv::cuda::cvtColor(frame_b_.picture, to, cv::COLOR_BGR2GRAY);
+
     if (last_flow_.size() != from.size())
         last_flow_ = {from.size(), CV_32FC2};
 
     // calculate backward dense optical flow
-    cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback = cv::cuda::FarnebackOpticalFlow::create(5, .5, false, 13, 10, 5,
-                                                                                               settings_.poly_sigma, cv::OPTFLOW_USE_INITIAL_FLOW);
-    farneback->calc(to, from, last_flow_);
+    farneback_->calc(to, from, last_flow_);
 
     cv::cuda::GpuMat x_map{from.size(), CV_32FC1};
     cv::cuda::GpuMat y_map{from.size(), CV_32FC1};

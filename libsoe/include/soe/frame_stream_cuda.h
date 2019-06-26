@@ -1,6 +1,7 @@
 #pragma once
 
 #include <opencv2/core/cuda.hpp>
+#include <opencv2/cudaoptflow.hpp>
 
 namespace soe {
 
@@ -15,7 +16,7 @@ struct FrameStreamCuda {
         double poly_sigma = .5;
     };
 
-    FrameStreamCuda() = default;
+    FrameStreamCuda();
     explicit FrameStreamCuda(Settings settings);
 
     [[nodiscard]] bool has_output() const;
@@ -28,6 +29,7 @@ private:
 
     Frame frame_a_;
     Frame frame_b_;
+    cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback_;
     cv::cuda::GpuMat last_flow_;
     int frames_count_ = 0;
 };

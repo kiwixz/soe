@@ -15,7 +15,7 @@ struct FrameStream {
         double poly_sigma = .5;
     };
 
-    FrameStream() = default;
+    FrameStream();
     explicit FrameStream(Settings settings);
 
     [[nodiscard]] bool has_output() const;
