@@ -7,9 +7,9 @@ var searchData=
   ['parse_5fglobal_5fconfig',['parse_global_config',['../structutils_1_1_config.html#a721b70a9e01d9b680b6976b2d25ef26d',1,'utils::Config']]],
   ['paths_2ecpp',['paths.cpp',['../paths_8cpp.html',1,'']]],
   ['paths_2eh',['paths.h',['../paths_8h.html',1,'']]],
-  ['picture',['picture',['../structsoe_1_1_frame_stream_1_1_frame.html#affaceb262e48ebc1cf072c943957dfd0',1,'soe::FrameStream::Frame']]],
+  ['picture',['picture',['../structsoe_1_1_frame_stream_1_1_frame.html#affaceb262e48ebc1cf072c943957dfd0',1,'soe::FrameStream::Frame::picture()'],['../structsoe_1_1_frame_stream_cuda_1_1_frame.html#a55130b422691d2d714e353f9ec35b40d',1,'soe::FrameStreamCuda::Frame::picture()']]],
   ['picture_2ecpp',['picture.cpp',['../picture_8cpp.html',1,'']]],
   ['picture_2eh',['picture.h',['../picture_8h.html',1,'']]],
   ['pictureyv12',['PictureYV12',['../structsoe_1_1_picture_y_v12.html',1,'soe::PictureYV12'],['../structsoe_1_1_picture_y_v12.html#a0960ec0d159434d44e7a46084bad904e',1,'soe::PictureYV12::PictureYV12()=default'],['../structsoe_1_1_picture_y_v12.html#af8b251b047e957ca8e907ece024bbf0f',1,'soe::PictureYV12::PictureYV12(int width, int height)']]],
-  ['poly_5fsigma',['poly_sigma',['../structsoe_1_1_frame_stream_1_1_settings.html#a4185002ad726a43702bfc8929cc37dfb',1,'soe::FrameStream::Settings']]]
+  ['poly_5fsigma',['poly_sigma',['../structsoe_1_1_frame_stream_1_1_settings.html#a4185002ad726a43702bfc8929cc37dfb',1,'soe::FrameStream::Settings::poly_sigma()'],['../structsoe_1_1_frame_stream_cuda_1_1_settings.html#a965e665377a9df0caa2eeaf204df5712',1,'soe::FrameStreamCuda::Settings::poly_sigma()']]]
 ];
