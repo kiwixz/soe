@@ -29,6 +29,7 @@ struct FrameStreamCuda {
 private:
     double target_fps_;
 
+    cv::cuda::Stream cuda_stream_;
     GpuFrame frame_a_;
     GpuFrame frame_b_;
     cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback_;
