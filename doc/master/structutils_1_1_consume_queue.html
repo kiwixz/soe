@@ -98,11 +98,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4fe15dd5c2862743ace5860207adffb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks until there is space to push element.  <a href="#a4fe15dd5c2862743ace5860207adffb1">More...</a><br /></td></tr>
 <tr class="separator:a4fe15dd5c2862743ace5860207adffb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0b139a3352a1ae7a9a3d83fe2783f4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structutils_1_1_consume_queue.html#ae0b139a3352a1ae7a9a3d83fe2783f4d">end</a> ()</td></tr>
-<tr class="memdesc:ae0b139a3352a1ae7a9a3d83fe2783f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make <a class="el" href="structutils_1_1_consume_queue.html#a3f8ef38cf99072b3e15b478a0b2c44f3" title="Blocks until an element is available, or returns empty after end.">pop()</a> non-blocking.  <a href="#ae0b139a3352a1ae7a9a3d83fe2783f4d">More...</a><br /></td></tr>
+<tr class="memdesc:ae0b139a3352a1ae7a9a3d83fe2783f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make <a class="el" href="structutils_1_1_consume_queue.html#ad3ed286023f7ec22917f0eaa80529dec" title="Blocks until an element is available, or returns empty after end.">pop()</a> non-blocking.  <a href="#ae0b139a3352a1ae7a9a3d83fe2783f4d">More...</a><br /></td></tr>
 <tr class="separator:ae0b139a3352a1ae7a9a3d83fe2783f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f8ef38cf99072b3e15b478a0b2c44f3"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structutils_1_1_consume_queue.html#a3e92695ae25582e626847382a4fedf77">Element</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structutils_1_1_consume_queue.html#a3f8ef38cf99072b3e15b478a0b2c44f3">pop</a> ()</td></tr>
-<tr class="memdesc:a3f8ef38cf99072b3e15b478a0b2c44f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks until an element is available, or returns empty after end.  <a href="#a3f8ef38cf99072b3e15b478a0b2c44f3">More...</a><br /></td></tr>
-<tr class="separator:a3f8ef38cf99072b3e15b478a0b2c44f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ed286023f7ec22917f0eaa80529dec"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="structutils_1_1_consume_queue.html#a3e92695ae25582e626847382a4fedf77">Element</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structutils_1_1_consume_queue.html#ad3ed286023f7ec22917f0eaa80529dec">pop</a> ()</td></tr>
+<tr class="memdesc:ad3ed286023f7ec22917f0eaa80529dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks until an element is available, or returns empty after end.  <a href="#ad3ed286023f7ec22917f0eaa80529dec">More...</a><br /></td></tr>
+<tr class="separator:ad3ed286023f7ec22917f0eaa80529dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -220,14 +220,14 @@ template&lt;typename TElement &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Make <a class="el" href="structutils_1_1_consume_queue.html#a3f8ef38cf99072b3e15b478a0b2c44f3" title="Blocks until an element is available, or returns empty after end.">pop()</a> non-blocking. </p>
+<p>Make <a class="el" href="structutils_1_1_consume_queue.html#ad3ed286023f7ec22917f0eaa80529dec" title="Blocks until an element is available, or returns empty after end.">pop()</a> non-blocking. </p>
 
 <p class="definition">Definition at line <a class="el" href="consume__queue_8h_source.html#l00056">56</a> of file <a class="el" href="consume__queue_8h_source.html">consume_queue.h</a>.</p>
 
 </div>
 </div>
-<a id="a3f8ef38cf99072b3e15b478a0b2c44f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f8ef38cf99072b3e15b478a0b2c44f3">&#9670;&nbsp;</a></span>pop()</h2>
+<a id="ad3ed286023f7ec22917f0eaa80529dec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3ed286023f7ec22917f0eaa80529dec">&#9670;&nbsp;</a></span>pop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +235,7 @@ template&lt;typename TElement &gt; </div>
 template&lt;typename TElement &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">TElement <a class="el" href="structutils_1_1_consume_queue.html">utils::ConsumeQueue</a>&lt; TElement &gt;::pop </td>
+          <td class="memname">std::optional&lt; TElement &gt; <a class="el" href="structutils_1_1_consume_queue.html">utils::ConsumeQueue</a>&lt; TElement &gt;::pop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -436,7 +436,7 @@ template&lt;typename TElement &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 27 2019 01:14:32 for soe by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 27 2019 01:51:17 for soe by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>

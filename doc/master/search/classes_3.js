@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pictureyv12',['PictureYV12',['../structsoe_1_1_picture_y_v12.html',1,'soe']]]
+  ['gpuframe',['GpuFrame',['../structsoe_1_1_frame_stream_cuda_1_1_gpu_frame.html',1,'soe::FrameStreamCuda']]]
 ];
