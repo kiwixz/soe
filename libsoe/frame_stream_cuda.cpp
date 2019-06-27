@@ -33,9 +33,12 @@ bool FrameStreamCuda::has_output() const
 
 void FrameStreamCuda::input_frame(Frame frame)
 {
+    is_flow_fresh_ = false;
     frame_a_ = std::move(frame_b_);
-    frame_b_ = GpuFrame{cv::cuda::GpuMat{}, frame.timestamp};  // GpuMat is like a shared_ptr without move, so we must create another one
+    frame_b_ = {};  // GpuMat is like a shared_ptr without move, so we must create another one
     frame_b_.picture.upload(frame.picture, cuda_stream_);
+    frame_b_.timestamp = frame.timestamp;
+    cv::cuda::cvtColor(frame_b_.picture, frame_b_.gray, cv::COLOR_BGR2GRAY, 0, cuda_stream_);
 }
 
 Frame FrameStreamCuda::output_frame()
@@ -44,26 +47,24 @@ Frame FrameStreamCuda::output_frame()
     frame.timestamp = frames_count_ / target_fps_;
 
     double t = (frame.timestamp - frame_a_.timestamp) / (frame_b_.timestamp - frame_a_.timestamp);  // how close of frame_b_ we are [0;1]
+    cv::Size picture_size = frame_a_.picture.size();
 
-    cv::cuda::GpuMat from;
-    cv::cuda::cvtColor(frame_a_.picture, from, cv::COLOR_BGR2GRAY, 0, cuda_stream_);
-    cv::cuda::GpuMat to;
-    cv::cuda::cvtColor(frame_b_.picture, to, cv::COLOR_BGR2GRAY, 0, cuda_stream_);
+    if (!is_flow_fresh_) {
+        if (last_flow_.size() != picture_size) {
+            last_flow_ = {picture_size, CV_32FC2};
+            x_map_ = {picture_size, CV_32FC1};
+            y_map_ = {picture_size, CV_32FC1};
+        }
 
-    if (last_flow_.size() != from.size())
-        last_flow_ = {from.size(), CV_32FC2};
+        // calculate backward dense optical flow
+        cuda_stream_.waitForCompletion();  // necessary to avoid artifacts
+        farneback_->calc(frame_b_.gray, frame_a_.gray, last_flow_, cuda_stream_);
+        is_flow_fresh_ = true;
+    }
 
-    // calculate backward dense optical flow
-    cuda_stream_.waitForCompletion();  // necessary to avoid artifacts
-    farneback_->calc(to, from, last_flow_, cuda_stream_);
-
-    cv::cuda::GpuMat x_map{from.size(), CV_32FC1};
-    cv::cuda::GpuMat y_map{from.size(), CV_32FC1};
-    cuda::flow_to_map(last_flow_, x_map, y_map, t, cuda_stream_);
-
-    cv::cuda::GpuMat frame_gpu;
-    cv::cuda::remap(frame_a_.picture, frame_gpu, x_map, y_map, cv::INTER_NEAREST, cv::BORDER_REPLICATE, {}, cuda_stream_);
-    frame_gpu.download(frame.picture, cuda_stream_);
+    cuda::flow_to_map(last_flow_, x_map_, y_map_, t, cuda_stream_);
+    cv::cuda::remap(frame_a_.picture, frame_gpu_, x_map_, y_map_, cv::INTER_NEAREST, cv::BORDER_REPLICATE, {}, cuda_stream_);
+    frame_gpu_.download(frame.picture, cuda_stream_);
 
     ++frames_count_;
     cuda_stream_.waitForCompletion();

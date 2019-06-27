@@ -9,8 +9,12 @@ namespace soe {
 
 struct FrameStreamCuda {
     struct GpuFrame {
+        GpuFrame() = default;
+
         cv::cuda::GpuMat picture;
         double timestamp;
+
+        cv::cuda::GpuMat gray;
     };
 
     struct Settings {
@@ -33,8 +37,15 @@ private:
     GpuFrame frame_a_;
     GpuFrame frame_b_;
     cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback_;
-    cv::cuda::GpuMat last_flow_;
     int frames_count_ = 0;
+
+    cv::cuda::GpuMat last_flow_;
+    bool is_flow_fresh_ = false;
+
+    // just to avoid realloc
+    cv::cuda::GpuMat x_map_;
+    cv::cuda::GpuMat y_map_;
+    cv::cuda::GpuMat frame_gpu_;
 };
 
 }  // namespace soe
