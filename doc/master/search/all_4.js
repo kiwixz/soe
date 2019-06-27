@@ -11,6 +11,7 @@ var searchData=
   ['frame_2eh',['frame.h',['../frame_8h.html',1,'']]],
   ['frame_5fa_5f',['frame_a_',['../structsoe_1_1_frame_stream.html#a9da8ba35b9130fb36559a99a3016b26a',1,'soe::FrameStream::frame_a_()'],['../structsoe_1_1_frame_stream_cuda.html#a7efc0a27663d1e680cf79f38860589d5',1,'soe::FrameStreamCuda::frame_a_()']]],
   ['frame_5fb_5f',['frame_b_',['../structsoe_1_1_frame_stream.html#ab0c76308823ad7c544ab476fe15346bd',1,'soe::FrameStream::frame_b_()'],['../structsoe_1_1_frame_stream_cuda.html#a4e9a781856a0102453f982269a988ba2',1,'soe::FrameStreamCuda::frame_b_()']]],
+  ['frame_5fgpu_5f',['frame_gpu_',['../structsoe_1_1_frame_stream_cuda.html#ac7b054f31f9ff7317c377ac11d60a4d5',1,'soe::FrameStreamCuda']]],
   ['frame_5fstream_2ecpp',['frame_stream.cpp',['../frame__stream_8cpp.html',1,'']]],
   ['frame_5fstream_2eh',['frame_stream.h',['../frame__stream_8h.html',1,'']]],
   ['frame_5fstream_5fcuda_2ecpp',['frame_stream_cuda.cpp',['../frame__stream__cuda_8cpp.html',1,'']]],

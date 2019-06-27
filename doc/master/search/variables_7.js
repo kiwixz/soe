@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['max_5fsize_5f',['max_size_',['../structutils_1_1_consume_queue.html#abd635e26d973ef36454e6f2b2ca32949',1,'utils::ConsumeQueue']]],
-  ['mutex_5f',['mutex_',['../structutils_1_1_consume_queue.html#a6382616b9ddc2fb4fdbc1f67ec6bc5db',1,'utils::ConsumeQueue']]]
+  ['last_5fflow_5f',['last_flow_',['../structsoe_1_1_frame_stream.html#adaf50645551687f2be3046ac607d9016',1,'soe::FrameStream::last_flow_()'],['../structsoe_1_1_frame_stream_cuda.html#a90c90807a132a4ffd0fdde0cd39dc803',1,'soe::FrameStreamCuda::last_flow_()']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['num_5fiters',['num_iters',['../structsoe_1_1_farneback_settings.html#a7c29590625d1935a77dc2e8e412467ee',1,'soe::FarnebackSettings']]],
-  ['num_5flevels',['num_levels',['../structsoe_1_1_farneback_settings.html#a41b918c99e0ac4efa8c6bbd6d0157b6e',1,'soe::FarnebackSettings']]]
+  ['max_5fsize_5f',['max_size_',['../structutils_1_1_consume_queue.html#abd635e26d973ef36454e6f2b2ca32949',1,'utils::ConsumeQueue']]],
+  ['mutex_5f',['mutex_',['../structutils_1_1_consume_queue.html#a6382616b9ddc2fb4fdbc1f67ec6bc5db',1,'utils::ConsumeQueue']]]
 ];
