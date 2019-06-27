@@ -11,5 +11,6 @@ var searchData=
   ['config_2etest_2ecpp',['config.test.cpp',['../config_8test_8cpp.html',1,'']]],
   ['consume_5fqueue_2eh',['consume_queue.h',['../consume__queue_8h.html',1,'']]],
   ['consumequeue',['ConsumeQueue',['../structutils_1_1_consume_queue.html',1,'utils::ConsumeQueue&lt; TElement &gt;'],['../structutils_1_1_consume_queue.html#aa61b997de2bed76ff54677817a829b09',1,'utils::ConsumeQueue::ConsumeQueue()=default'],['../structutils_1_1_consume_queue.html#adc62be1b1ff2024f06ded6fc903c1617',1,'utils::ConsumeQueue::ConsumeQueue(size_t max_size)']]],
-  ['contains',['contains',['../structutils_1_1_config.html#a87efc18b4ad2bc75c50b328a0ae26f7c',1,'utils::Config']]]
+  ['contains',['contains',['../structutils_1_1_config.html#a87efc18b4ad2bc75c50b328a0ae26f7c',1,'utils::Config']]],
+  ['cuda_5fstream_5f',['cuda_stream_',['../structsoe_1_1_frame_stream_cuda.html#aeacad1ef77594504c07b171c6576dfad',1,'soe::FrameStreamCuda']]]
 ];
