@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scopeexitgeneric',['ScopeExitGeneric',['../namespaceutils.html#a1fe1bb0f736a869949b67870ec3afbd3',1,'utils']]]
+  ['function',['Function',['../structutils_1_1_scope_exit.html#a035ba1cd0d0fa6252a2355367f974ed4',1,'utils::ScopeExit']]]
 ];
