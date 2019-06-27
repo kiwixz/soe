@@ -1,17 +1,12 @@
 #pragma once
 
 #include "soe/farneback_settings.h"
-#include <opencv2/core/mat.hpp>
+#include "soe/frame.h"
 #include <opencv2/video/tracking.hpp>
 
 namespace soe {
 
 struct FrameStream {
-    struct Frame {
-        cv::Mat picture;
-        double timestamp;
-    };
-
     struct Settings {
         double target_fps = 60.0;
         double poly_sigma = .5;

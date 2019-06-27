@@ -1,13 +1,14 @@
 #pragma once
 
 #include "soe/farneback_settings.h"
+#include "soe/frame.h"
 #include <opencv2/core/cuda.hpp>
 #include <opencv2/cudaoptflow.hpp>
 
 namespace soe {
 
 struct FrameStreamCuda {
-    struct Frame {
+    struct GpuFrame {
         cv::cuda::GpuMat picture;
         double timestamp;
     };
@@ -28,8 +29,8 @@ struct FrameStreamCuda {
 private:
     double target_fps_;
 
-    Frame frame_a_;
-    Frame frame_b_;
+    GpuFrame frame_a_;
+    GpuFrame frame_b_;
     cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback_;
     cv::cuda::GpuMat last_flow_;
     int frames_count_ = 0;

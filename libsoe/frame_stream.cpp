@@ -34,7 +34,7 @@ void FrameStream::input_frame(Frame frame)
     frame_b_ = std::move(frame);
 }
 
-FrameStream::Frame FrameStream::output_frame()
+Frame FrameStream::output_frame()
 {
     Frame frame;
     frame.timestamp = frames_count_ / target_fps_;

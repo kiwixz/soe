@@ -33,10 +33,10 @@ bool FrameStreamCuda::has_output() const
 void FrameStreamCuda::input_frame(Frame frame)
 {
     frame_a_ = std::move(frame_b_);
-    frame_b_ = std::move(frame);
+    frame_b_ = GpuFrame{cv::cuda::GpuMat{frame.picture}, frame.timestamp};  // GpuMat is like a shared_ptr without move, so we must create another one
 }
 
-FrameStreamCuda::Frame FrameStreamCuda::output_frame()
+Frame FrameStreamCuda::output_frame()
 {
     Frame frame;
     frame.timestamp = frames_count_ / target_fps_;
@@ -58,7 +58,9 @@ FrameStreamCuda::Frame FrameStreamCuda::output_frame()
     cv::cuda::GpuMat y_map{from.size(), CV_32FC1};
     cuda::flow_to_map(last_flow_, x_map, y_map, t);
 
-    cv::cuda::remap(frame_a_.picture, frame.picture, x_map, y_map, cv::INTER_NEAREST, cv::BORDER_REPLICATE);
+    cv::cuda::GpuMat frame_gpu;
+    cv::cuda::remap(frame_a_.picture, frame_gpu, x_map, y_map, cv::INTER_NEAREST, cv::BORDER_REPLICATE);
+    frame_gpu.download(frame.picture);
 
     ++frames_count_;
     return frame;

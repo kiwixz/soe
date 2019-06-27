@@ -60,18 +60,20 @@ void ConsumeQueue<TElement>::end()
 }
 
 template <typename TElement>
-TElement ConsumeQueue<TElement>::pop()
+std::optional<TElement> ConsumeQueue<TElement>::pop()
 {
-    {
-        std::unique_lock lock{mutex_};
-        condvar_pop_.wait(lock, [&] {
-            return ended_ || !queue_.empty();
-        });
-        if (ended && queue_.empty())
-            return {};
-        Element e = std::move(queue_.front());
-        queue_.pop();
-    }
+    std::unique_lock lock{mutex_};
+
+    condvar_pop_.wait(lock, [&] {
+        return ended_ || !queue_.empty();
+    });
+    if (ended_ && queue_.empty())
+        return {};
+    Element e = std::move(queue_.front());
+    queue_.pop();
+
+    lock.unlock();
+
     condvar_push_.notify_one();
     return e;
 }

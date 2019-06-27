@@ -1,6 +1,8 @@
 #include "soe/frame_stream.h"
 #include "soe/frame_stream_cuda.h"
 #include "utils/config.h"
+#include "utils/consume_queue.h"
+#include "utils/scope_exit.h"
 #include <opencv2/videoio.hpp>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
@@ -63,39 +65,40 @@ void main_impl(int argc, char** argv)
                                          conf.get<int>("farneback.poly_n"),
                                          conf.get<double>("farneback.poly_sigma")};
 
-    if (conf.get<bool>("cuda")) {
-        FrameStreamCuda stream{out_fps, farneback_settings};
-        cv::Mat frame_cpu;
-        FrameStreamCuda::Frame frame;
-        frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
-        while (reader.read(frame_cpu)) {
-            fmt::print("Analyzing frame {}/{}...\r",
-                       static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
-                       static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
-            frame.picture = cv::cuda::GpuMat{frame_cpu};  // GpuMat is like a shared_ptr without move, so we must create another one
-            stream.input_frame(std::move(frame));
-            while (stream.has_output()) {
-                FrameStreamCuda::Frame out_frame = stream.output_frame();
-                out_frame.picture.download(frame_cpu);
-                writer.write(frame_cpu);
-            }
-            frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
-        }
-    }
-    else {
-        FrameStream stream{out_fps, farneback_settings};
-        FrameStream::Frame frame;
+    utils::ConsumeQueue<Frame> read_queue{16};
+    utils::ConsumeQueue<Frame> write_queue{16};
+
+    std::thread reader_thread{[&] {
+        utils::ScopeExit end_queue{[&] { read_queue.end(); }};
+        Frame frame;
         frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
         while (reader.read(frame.picture)) {
-            fmt::print("Analyzing frame {}/{}...\r",
-                       static_cast<int>(reader.get(cv::CAP_PROP_POS_FRAMES)) + 1,
-                       static_cast<int>(reader.get(cv::CAP_PROP_FRAME_COUNT)));
-            stream.input_frame(std::move(frame));
-            while (stream.has_output())
-                writer.write(stream.output_frame().picture);
+            read_queue.push(std::move(frame));
             frame.timestamp = reader.get(cv::CAP_PROP_POS_MSEC) / 1000;
         }
-    }
+    }};
+
+    std::thread writer_thread{[&] {
+        while (std::optional<Frame> frame = write_queue.pop())
+            writer.write(frame->picture);
+    }};
+
+    auto process = [&](auto&& stream) {
+        while (std::optional<Frame> frame = read_queue.pop()) {
+            fmt::print("Analyzing frame at {}...\r", frame->timestamp);
+            stream.input_frame(std::move(*frame));
+            while (stream.has_output())
+                write_queue.push(stream.output_frame());
+        }
+    };
+    if (conf.get<bool>("cuda"))
+        process(FrameStreamCuda{out_fps, farneback_settings});
+    else
+        process(FrameStream{out_fps, farneback_settings});
+    write_queue.end();
+
+    reader_thread.join();
+    writer_thread.join();
 }
 
 int main(int argc, char** argv)
