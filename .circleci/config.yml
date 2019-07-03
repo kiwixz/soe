@@ -10,23 +10,12 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          name: Restore pacman cache
-          keys:
-            - packages-1-{{ .Branch }}-{{ .Revision }}
-            - packages-1-{{ .Branch }}-
-            - packages-1-
       - run:
           name: Install system dependencies
           command: |
             pacman --color=always --needed --noconfirm -Sy  \
                 awk yasm  `# opencv (ffmpeg)`  \
                 cuda
-      - save_cache:
-          name: Save pacman cache
-          key: packages-1-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - /var/cache/pacman/pkg
 
       - restore_cache:
           name: Restore vcpkg cache
