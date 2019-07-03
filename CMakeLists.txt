@@ -21,7 +21,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} -Weverything  \
         -Wno-c++98-compat-pedantic -Wno-disabled-macro-expansion -Wno-double-promotion -Wno-exit-time-destructors  \
-        -Wno-float-equal -Wno-padded -Wno-sign-conversion -Wno-weak-vtables"
+        -Wno-float-equal -Wno-padded -Wno-return-std-move-in-c++11 -Wno-sign-conversion -Wno-weak-vtables"
     )
     set(CMAKE_CXX_FLAGS_DEBUG "-D DEBUG -O1 -g -fno-omit-frame-pointer -fsanitize=address -fsanitize=undefined")
     set(CMAKE_CXX_FLAGS_RELEASE "-D NDEBUG -O3 -flto -ffast-math")
