@@ -56,7 +56,8 @@ jobs:
           environment:
             CUDACXX: /opt/cuda/bin/nvcc
             CXXFLAGS: -fdiagnostics-color=always -Werror
-            LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
+            LDFLAGS: -fdiagnostics-color=always -Werror
+            #LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld  # doesnt work with nvcc
             ASAN_OPTIONS: check_initialization_order=1
             UBSAN_OPTIONS: print_stacktrace=1
           command: |
@@ -70,7 +71,8 @@ jobs:
           environment:
             CUDACXX: /opt/cuda/bin/nvcc
             CXXFLAGS: -fdiagnostics-color=always -Werror
-            LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld
+            LDFLAGS: -fdiagnostics-color=always -Werror
+            #LDFLAGS: -fdiagnostics-color=always -Werror -fuse-ld=lld  # doesnt work with nvcc
           command: |
             mkdir -p "build/release"
             cd "build/release"
