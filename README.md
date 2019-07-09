@@ -10,9 +10,9 @@ Perform motion interpolation on videos.  Using it to increase framerate will giv
 
 ## Near future plans
 
-- Motion interpolation with CPU code for offline processing (similar to ffmpeg's `-vf minterpolate`).
+- Improve quality of result
+- Faster GPU processing
 - VLC plugin
-- Realtime processing using GPU (probably with CUDA).
 
 
 #
