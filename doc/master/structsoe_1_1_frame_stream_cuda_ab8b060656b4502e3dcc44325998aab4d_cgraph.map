@@ -1,4 +1,5 @@
 <map id="soe::FrameStreamCuda::output_frame" name="soe::FrameStreamCuda::output_frame">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,228,47"/>
-<area shape="rect" id="node2" href="$namespacesoe_1_1cuda.html#aedba178567daa7d39ac607c4427540e7" title=" " alt="" coords="276,13,519,39"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,46,228,87"/>
+<area shape="rect" id="node2" href="$namespacesoe_1_1anonymous__namespace_02frame__stream__cuda_8cpp_03.html#af7a97ab443dda695d370ce02091fc860" title=" " alt="" coords="276,5,539,61"/>
+<area shape="rect" id="node3" href="$namespacesoe_1_1cuda.html#abd5685966ea7bec06aae6744b87aebb3" title=" " alt="" coords="286,85,529,112"/>
 </map>

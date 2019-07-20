@@ -1,8 +1,10 @@
 var searchData=
 [
+  ['anonymous_5fnamespace_7bframe_5fstream_5fcuda_2ecpp_7d',['anonymous_namespace{frame_stream_cuda.cpp}',['../namespacesoe_1_1anonymous__namespace_02frame__stream__cuda_8cpp_03.html',1,'soe']]],
   ['anonymous_5fnamespace_7bmain_2ecpp_7d',['anonymous_namespace{main.cpp}',['../namespacesoe_1_1anonymous__namespace_02main_8cpp_03.html',1,'soe']]],
   ['cuda',['cuda',['../namespacesoe_1_1cuda.html',1,'soe']]],
   ['soe',['soe',['../index.html',1,'']]],
+  ['scaled',['scaled',['../structsoe_1_1_frame_stream_cuda_1_1_gpu_frame.html#a79a64a3a61edb416792d107856d30f08',1,'soe::FrameStreamCuda::GpuFrame']]],
   ['scope_5fexit_2eh',['scope_exit.h',['../scope__exit_8h.html',1,'']]],
   ['scope_5fexit_2etest_2ecpp',['scope_exit.test.cpp',['../scope__exit_8test_8cpp.html',1,'']]],
   ['scopeexit',['ScopeExit',['../structutils_1_1_scope_exit.html',1,'utils::ScopeExit&lt; TFunction &gt;'],['../structutils_1_1_scope_exit.html#a819261840ec8da70baba1d9f34b2de99',1,'utils::ScopeExit::ScopeExit()=default'],['../structutils_1_1_scope_exit.html#a61c3a1018aed62014ca53f71e02e0493',1,'utils::ScopeExit::ScopeExit(Function function)'],['../structutils_1_1_scope_exit.html#a0b7af506b0aff51ca1e4756d053c3ace',1,'utils::ScopeExit::ScopeExit(const ScopeExit &amp;)=delete'],['../structutils_1_1_scope_exit.html#abf0224ced05a0bf04d481a691201cc43',1,'utils::ScopeExit::ScopeExit(ScopeExit &amp;&amp;other) noexcept']]],
