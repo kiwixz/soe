@@ -41,11 +41,13 @@ private:
     cv::cuda::GpuMat grid_;
     int frames_count_ = 0;
 
-    cv::cuda::GpuMat flow_;
-    cv::cuda::GpuMat flow_status_;
+    cv::cuda::GpuMat flow_big_;
     bool is_flow_fresh_ = false;
 
     // just to avoid realloc
+    cv::cuda::GpuMat flow_;
+    cv::cuda::GpuMat flow_status_;
+    cv::cuda::GpuMat flow_rel_;
     cv::cuda::GpuMat x_map_;
     cv::cuda::GpuMat y_map_;
     cv::cuda::GpuMat frame_gpu_;
