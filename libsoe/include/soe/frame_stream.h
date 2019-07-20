@@ -25,8 +25,8 @@ private:
 
     Frame frame_a_;
     Frame frame_b_;
-    cv::Ptr<cv::FarnebackOpticalFlow> farneback_;
-    cv::Mat last_flow_;
+    cv::Ptr<cv::FarnebackOpticalFlow> optflow_;
+    cv::Mat flow_;
     int frames_count_ = 0;
 };
 

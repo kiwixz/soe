@@ -23,7 +23,7 @@ struct FrameStreamCuda {
     };
 
     FrameStreamCuda() = default;
-    FrameStreamCuda(double target_fps, FarnebackSettings settings);
+    FrameStreamCuda(cv::Size picture_size, double target_fps, FarnebackSettings settings);
 
     [[nodiscard]] bool has_output() const;
 
@@ -31,15 +31,18 @@ struct FrameStreamCuda {
     Frame output_frame();
 
 private:
+    cv::Size picture_size_;
     double target_fps_;
 
     cv::cuda::Stream cuda_stream_;
     GpuFrame frame_a_;
     GpuFrame frame_b_;
-    cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback_;
+    cv::Ptr<cv::cuda::SparsePyrLKOpticalFlow> optflow_;
+    cv::cuda::GpuMat grid_;
     int frames_count_ = 0;
 
-    cv::cuda::GpuMat last_flow_;
+    cv::cuda::GpuMat flow_;
+    cv::cuda::GpuMat flow_status_;
     bool is_flow_fresh_ = false;
 
     // just to avoid realloc

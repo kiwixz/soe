@@ -9,14 +9,14 @@ FrameStream::FrameStream(double target_fps, FarnebackSettings settings) :
     frame_a_.timestamp = -1;
     frame_b_.timestamp = -1;
 
-    farneback_ = cv::FarnebackOpticalFlow::create(settings.num_levels,
-                                                  settings.pyr_scale,
-                                                  settings.fast_pyramids,
-                                                  settings.win_size,
-                                                  settings.num_iters,
-                                                  settings.poly_n,
-                                                  settings.poly_sigma,
-                                                  settings.flags);
+    optflow_ = cv::FarnebackOpticalFlow::create(settings.num_levels,
+                                                settings.pyr_scale,
+                                                settings.fast_pyramids,
+                                                settings.win_size,
+                                                settings.num_iters,
+                                                settings.poly_n,
+                                                settings.poly_sigma,
+                                                settings.flags);
 }
 
 bool FrameStream::has_output() const
@@ -46,16 +46,16 @@ Frame FrameStream::output_frame()
     cv::Mat to;
     cv::cvtColor(frame_b_.picture, to, cv::COLOR_BGR2GRAY);
 
-    if (last_flow_.size() != from.size())
-        last_flow_ = {from.size(), CV_32FC2};
+    if (flow_.size() != from.size())
+        flow_ = {from.size(), CV_32FC2};
 
     // calculate backward dense optical flow
-    farneback_->calc(to, from, last_flow_);
+    optflow_->calc(to, from, flow_);
 
-    cv::Mat map{last_flow_.size(), CV_32FC2};
+    cv::Mat map{flow_.size(), CV_32FC2};
     for (int y = 0; y < map.rows; ++y)
         for (int x = 0; x < map.cols; ++x) {
-            const auto& f = last_flow_.at<cv::Point2f>(y, x);
+            const auto& f = flow_.at<cv::Point2f>(y, x);
             map.at<cv::Point2f>(y, x) = {static_cast<float>(x + f.x * t),
                                          static_cast<float>(y + f.y * t)};
         }

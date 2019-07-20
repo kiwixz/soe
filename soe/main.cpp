@@ -92,7 +92,7 @@ void main_impl(int argc, char** argv)
         }
     };
     if (conf.get<bool>("cuda"))
-        process(FrameStreamCuda{out_fps, farneback_settings});
+        process(FrameStreamCuda{frame_size, out_fps, farneback_settings});
     else
         process(FrameStream{out_fps, farneback_settings});
     write_queue.end();

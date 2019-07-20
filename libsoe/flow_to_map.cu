@@ -5,33 +5,41 @@ namespace soe {
 namespace cuda {
 namespace {
 
-__global__ void flow_to_map_kernel(const cv::cuda::PtrStepSz<float2> flow,
-                                   cv::cuda::PtrStepSzf x_map, cv::cuda::PtrStepSzf y_map,
-                                   float t)
+__global__ void flow_to_map_kernel(const cv::cuda::PtrStep<float2> flow, const cv::cuda::PtrStepb flow_status,
+                                   int2 picture_size, float t,
+                                   cv::cuda::PtrStepf x_map, cv::cuda::PtrStepf y_map)
 {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-    if (x >= flow.cols || y >= flow.rows)
+    if (x >= picture_size.x || y >= picture_size.y)
         return;
 
-    float2 flow_xy = flow(y, x);
-    x_map(y, x) = x + flow_xy.x * t;
-    y_map(y, x) = y + flow_xy.y * t;
+    bool found = flow_status(0, y * picture_size.x + x);
+    float2 flow_xy = flow(0, y * picture_size.x + x);
+    x_map(y, x) = found * (x + t * (flow_xy.x - x)) + !found * x;
+    y_map(y, x) = found * (y + t * (flow_xy.y - y)) + !found * y;
 }
 
 }  // namespace
 
 
-void flow_to_map(const cv::cuda::GpuMat& flow,
+void flow_to_map(const cv::cuda::GpuMat& flow, const cv::cuda::GpuMat& flow_status,
+                 cv::Size picture_size, double t,
                  cv::cuda::GpuMat& x_map, cv::cuda::GpuMat& y_map,
-                 double t, cv::cuda::Stream cuda_stream)
+                 cv::cuda::Stream cuda_stream)
 {
     dim3 threads{64, 16};
-    dim3 blocks{static_cast<unsigned>(std::ceil(flow.size().width / static_cast<double>(threads.x))),
-                static_cast<unsigned>(std::ceil(flow.size().height / static_cast<double>(threads.y)))};
+    dim3 blocks{static_cast<unsigned>(std::ceil(picture_size.width / static_cast<double>(threads.x))),
+                static_cast<unsigned>(std::ceil(picture_size.height / static_cast<double>(threads.y)))};
     cudaStream_t stream = cv::cuda::StreamAccessor::getStream(cuda_stream);
-    flow_to_map_kernel<<<blocks, threads, 0, stream>>>(flow, x_map, y_map, static_cast<float>(t));
+    flow_to_map_kernel<<<blocks, threads, 0, stream>>>(flow, flow_status,
+                                                       {picture_size.width, picture_size.height}, static_cast<float>(t),
+                                                       x_map, y_map);
+
+#if DEBUG
+    cuda_stream.waitForCompletion();  // will abort if there is any error
+#endif
 }
 
 }  // namespace cuda
