@@ -2,6 +2,7 @@
 
 #include "soe/farneback_settings.h"
 #include "soe/frame.h"
+#include "utils/vec.h"
 #include <opencv2/core/cuda.hpp>
 #include <opencv2/cudaoptflow.hpp>
 
@@ -15,6 +16,7 @@ struct FrameStreamCuda {
         double timestamp;
 
         cv::cuda::GpuMat gray;
+        cv::cuda::GpuMat scaled;
     };
 
     struct Settings {
@@ -23,7 +25,7 @@ struct FrameStreamCuda {
     };
 
     FrameStreamCuda() = default;
-    FrameStreamCuda(double target_fps, FarnebackSettings settings);
+    FrameStreamCuda(cv::Size picture_size, double target_fps, utils::Vec2d scale, FarnebackSettings settings);
 
     [[nodiscard]] bool has_output() const;
 
@@ -43,6 +45,7 @@ private:
     bool is_flow_fresh_ = false;
 
     // just to avoid realloc
+    cv::cuda::GpuMat last_flow_scaled_;
     cv::cuda::GpuMat x_map_;
     cv::cuda::GpuMat y_map_;
     cv::cuda::GpuMat frame_gpu_;

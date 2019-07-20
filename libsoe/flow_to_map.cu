@@ -5,9 +5,8 @@ namespace soe {
 namespace cuda {
 namespace {
 
-__global__ void flow_to_map_kernel(const cv::cuda::PtrStepSz<float2> flow,
-                                   cv::cuda::PtrStepSzf x_map, cv::cuda::PtrStepSzf y_map,
-                                   float t)
+__global__ void flow_to_map_kernel(const cv::cuda::PtrStepSz<float2> flow, float t,
+                                   cv::cuda::PtrStepSzf x_map, cv::cuda::PtrStepSzf y_map)
 {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
@@ -23,15 +22,15 @@ __global__ void flow_to_map_kernel(const cv::cuda::PtrStepSz<float2> flow,
 }  // namespace
 
 
-void flow_to_map(const cv::cuda::GpuMat& flow,
+void flow_to_map(const cv::cuda::GpuMat& flow, double t,
                  cv::cuda::GpuMat& x_map, cv::cuda::GpuMat& y_map,
-                 double t, cv::cuda::Stream cuda_stream)
+                 cv::cuda::Stream& cuda_stream)
 {
     dim3 threads{64, 16};
     dim3 blocks{static_cast<unsigned>(std::ceil(flow.size().width / static_cast<double>(threads.x))),
                 static_cast<unsigned>(std::ceil(flow.size().height / static_cast<double>(threads.y)))};
     cudaStream_t stream = cv::cuda::StreamAccessor::getStream(cuda_stream);
-    flow_to_map_kernel<<<blocks, threads, 0, stream>>>(flow, x_map, y_map, static_cast<float>(t));
+    flow_to_map_kernel<<<blocks, threads, 0, stream>>>(flow, static_cast<float>(t), x_map, y_map);
 }
 
 }  // namespace cuda

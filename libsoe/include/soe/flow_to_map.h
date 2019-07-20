@@ -5,9 +5,9 @@
 namespace soe {
 namespace cuda {
 
-void flow_to_map(const cv::cuda::GpuMat& flow,
+void flow_to_map(const cv::cuda::GpuMat& flow, double t,
                  cv::cuda::GpuMat& x_map, cv::cuda::GpuMat& y_map,
-                 double t, cv::cuda::Stream cuda_stream = cv::cuda::Stream::Null());
+                 cv::cuda::Stream& cuda_stream = cv::cuda::Stream::Null());
 
 }
 }  // namespace soe
