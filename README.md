@@ -8,13 +8,6 @@
 Perform motion interpolation on videos.  Using it to increase framerate will give the video a [**S**oap **O**pera **E**ffect](https://en.wikipedia.org/wiki/Motion_interpolation#Soap_opera_effect).
 
 
-## Near future plans
-
-- Improve quality of result
-- Faster GPU processing
-- VLC plugin
-
-
 #
 
 _Licensed under the [MIT License](LICENSE)._
