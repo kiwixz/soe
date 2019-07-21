@@ -22,27 +22,17 @@ void resize_2c(const cv::cuda::GpuMat& a, cv::cuda::GpuMat& b,
 
 }  // namespace
 
-FrameStreamCuda::FrameStreamCuda(cv::Size picture_size, double target_fps, utils::Vec2d scale, FarnebackSettings settings) :
-    target_fps_{target_fps}
+
+FrameStreamCuda::FrameStreamCuda(cv::Size picture_size, double target_fps, utils::Vec2d scale, const FarnebackSettings& settings) :
+    target_fps_{target_fps},
+    flow_ab_{picture_size, scale, settings},
+    flow_ba_{picture_size, scale, settings}
 {
     frame_a_.timestamp = -1;
     frame_b_.timestamp = -1;
 
-    last_flow_scaled_ = {cv::Size{static_cast<int>(picture_size.width * scale.x),
-                                  static_cast<int>(picture_size.height * scale.y)},
-                         CV_32FC2};
-    last_flow_ = {picture_size, CV_32FC2};
     x_map_ = {picture_size, CV_32FC1};
     y_map_ = {picture_size, CV_32FC1};
-
-    farneback_ = cv::cuda::FarnebackOpticalFlow::create(settings.num_levels,
-                                                        settings.pyr_scale,
-                                                        settings.fast_pyramids,
-                                                        settings.win_size,
-                                                        settings.num_iters,
-                                                        settings.poly_n,
-                                                        settings.poly_sigma,
-                                                        settings.flags);
 }
 
 bool FrameStreamCuda::has_output() const
@@ -62,7 +52,7 @@ void FrameStreamCuda::input_frame(Frame frame)
     frame_b_.picture.upload(frame.picture, cuda_stream_);
     frame_b_.timestamp = frame.timestamp;
     cv::cuda::cvtColor(frame_b_.picture, frame_b_.gray, cv::COLOR_BGR2GRAY, 0, cuda_stream_);
-    cv::cuda::resize(frame_b_.gray, frame_b_.scaled, last_flow_scaled_.size(), 0.0, 0.0, cv::INTER_LINEAR, cuda_stream_);
+    cv::cuda::resize(frame_b_.gray, frame_b_.scaled, flow_ab_.last_flow_scaled.size(), 0.0, 0.0, cv::INTER_LINEAR, cuda_stream_);
 }
 
 Frame FrameStreamCuda::output_frame()
@@ -73,21 +63,43 @@ Frame FrameStreamCuda::output_frame()
     double t = (frame.timestamp - frame_a_.timestamp) / (frame_b_.timestamp - frame_a_.timestamp);  // how close of frame_b_ we are [0;1]
 
     if (!is_flow_fresh_) {
-        // calculate backward dense optical flow
+        // calculate forward and backward dense optical flow
         cuda_stream_.waitForCompletion();  // seems necessary to avoid artifacts
-        farneback_->calc(frame_b_.scaled, frame_a_.scaled, last_flow_scaled_, cuda_stream_);
-        resize_2c(last_flow_scaled_, last_flow_, last_flow_.size(), 0.0, 0.0, cv::INTER_LINEAR, cuda_stream_);
+        flow_ab_.farneback->calc(frame_a_.scaled, frame_b_.scaled, flow_ab_.last_flow_scaled, cuda_stream_);
+        resize_2c(flow_ab_.last_flow_scaled, flow_ab_.last_flow, flow_ab_.last_flow.size(), 0.0, 0.0, cv::INTER_LINEAR, cuda_stream_);
+        flow_ba_.farneback->calc(frame_b_.scaled, frame_a_.scaled, flow_ba_.last_flow_scaled, cuda_stream_);
+        resize_2c(flow_ba_.last_flow_scaled, flow_ba_.last_flow, flow_ba_.last_flow.size(), 0.0, 0.0, cv::INTER_LINEAR, cuda_stream_);
         is_flow_fresh_ = true;
     }
 
-    cuda::flow_to_map(last_flow_, t, x_map_, y_map_, cuda_stream_);
-    cv::cuda::remap(frame_a_.picture, frame_gpu_, x_map_, y_map_, cv::INTER_NEAREST, cv::BORDER_REPLICATE, {}, cuda_stream_);
-    //cv::cuda::addWeighted(frame_gpu_, 1.0 - t, frame_b_.picture, t, 0.0, frame_gpu_, -1, cuda_stream_);
+    cuda::flow_to_map(flow_ab_.last_flow, 1.0 - t, x_map_, y_map_, cuda_stream_);
+    cv::cuda::remap(frame_b_.picture, flow_ab_.remap, x_map_, y_map_, cv::INTER_LINEAR, cv::BORDER_REPLICATE, {}, cuda_stream_);
+    cuda::flow_to_map(flow_ba_.last_flow, t, x_map_, y_map_, cuda_stream_);
+    cv::cuda::remap(frame_a_.picture, flow_ba_.remap, x_map_, y_map_, cv::INTER_LINEAR, cv::BORDER_REPLICATE, {}, cuda_stream_);
+    cv::cuda::addWeighted(flow_ab_.remap, t, flow_ba_.remap, 1.0 - t, 0.0, frame_gpu_, -1, cuda_stream_);
     frame_gpu_.download(frame.picture, cuda_stream_);
 
     ++frames_count_;
     cuda_stream_.waitForCompletion();
     return frame;
+}
+
+
+FrameStreamCuda::Flow::Flow(cv::Size picture_size, utils::Vec2d scale, const FarnebackSettings& settings)
+{
+    last_flow_scaled = {cv::Size{static_cast<int>(picture_size.width * scale.x),
+                                 static_cast<int>(picture_size.height * scale.y)},
+                        CV_32FC2};
+    last_flow = {picture_size, CV_32FC2};
+
+    farneback = cv::cuda::FarnebackOpticalFlow::create(settings.num_levels,
+                                                       settings.pyr_scale,
+                                                       settings.fast_pyramids,
+                                                       settings.win_size,
+                                                       settings.num_iters,
+                                                       settings.poly_n,
+                                                       settings.poly_sigma,
+                                                       settings.flags);
 }
 
 }  // namespace soe
