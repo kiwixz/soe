@@ -6,7 +6,7 @@ namespace cuda {
 namespace {
 
 __global__ void flow_to_map_kernel(const cv::cuda::PtrStepSz<float2> flow, float t,
-                                   cv::cuda::PtrStepSzf x_map, cv::cuda::PtrStepSzf y_map)
+                                   cv::cuda::PtrStepf x_map, cv::cuda::PtrStepf y_map)
 {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;

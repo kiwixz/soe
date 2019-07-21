@@ -31,7 +31,7 @@ void main_impl(int argc, char** argv)
     conf.set("farneback.num_levels", "5");
     conf.set("farneback.pyr_scale", "0.5");
     conf.set("farneback.fast_pyramids", "false");
-    conf.set("farneback.win_size", "52");
+    conf.set("farneback.win_size", "26");
     conf.set("farneback.num_iters", "10");
     conf.set("farneback.poly_n", "5");
     conf.set("farneback.poly_sigma", "1.1");

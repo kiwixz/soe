@@ -82,6 +82,7 @@ Frame FrameStreamCuda::output_frame()
 
     cuda::flow_to_map(last_flow_, t, x_map_, y_map_, cuda_stream_);
     cv::cuda::remap(frame_a_.picture, frame_gpu_, x_map_, y_map_, cv::INTER_NEAREST, cv::BORDER_REPLICATE, {}, cuda_stream_);
+    //cv::cuda::addWeighted(frame_gpu_, 1.0 - t, frame_b_.picture, t, 0.0, frame_gpu_, -1, cuda_stream_);
     frame_gpu_.download(frame.picture, cuda_stream_);
 
     ++frames_count_;
