@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['x',['x',['../structutils_1_1_vec2.html#a3bbe955a5751941ba8006024d8d23b93',1,'utils::Vec2']]],
-  ['x_5fmap_5f',['x_map_',['../structsoe_1_1_frame_stream_cuda.html#a84ffbaa0225ed442b6c425920f915b40',1,'soe::FrameStreamCuda']]]
+  ['width_5f',['width_',['../structsoe_1_1_picture_y_v12.html#acbedd2fd59b45cc3d96aa4bd2e0b1d38',1,'soe::PictureYV12']]],
+  ['win_5fsize',['win_size',['../structsoe_1_1_farneback_settings.html#ad3af205ee2ea785293aded9c9ad41ad5',1,'soe::FarnebackSettings']]],
+  ['workers_5f',['workers_',['../structutils_1_1_thread_pool.html#aabffd3c638a71f70aec367027d1395e8',1,'utils::ThreadPool']]]
 ];

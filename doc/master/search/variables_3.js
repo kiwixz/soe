@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['farneback_5f',['farneback_',['../structsoe_1_1_frame_stream.html#a23d435b11c728ff447d75806104ea376',1,'soe::FrameStream::farneback_()'],['../structsoe_1_1_frame_stream_cuda.html#a272e3fc6ddbf079f1458f6f3fee01540',1,'soe::FrameStreamCuda::farneback_()']]],
+  ['farneback',['farneback',['../structsoe_1_1_frame_stream_cuda_1_1_flow.html#a911d8d768e3f5b33c06998181fdde7a0',1,'soe::FrameStreamCuda::Flow']]],
+  ['farneback_5f',['farneback_',['../structsoe_1_1_frame_stream.html#a23d435b11c728ff447d75806104ea376',1,'soe::FrameStream']]],
   ['fast_5fpyramids',['fast_pyramids',['../structsoe_1_1_farneback_settings.html#a3c24827175c647814ff739159bc28b9a',1,'soe::FarnebackSettings']]],
   ['flags',['flags',['../structsoe_1_1_farneback_settings.html#a214130d89fe3024128364d8a2f0d8b8f',1,'soe::FarnebackSettings']]],
+  ['flow_5fab_5f',['flow_ab_',['../structsoe_1_1_frame_stream_cuda.html#a853fa806a46e1b261a57f84c8b4dce49',1,'soe::FrameStreamCuda']]],
+  ['flow_5fba_5f',['flow_ba_',['../structsoe_1_1_frame_stream_cuda.html#a1f150133ece422e7ad567e01937edbd4',1,'soe::FrameStreamCuda']]],
   ['frame_5fa_5f',['frame_a_',['../structsoe_1_1_frame_stream.html#a9da8ba35b9130fb36559a99a3016b26a',1,'soe::FrameStream::frame_a_()'],['../structsoe_1_1_frame_stream_cuda.html#a7efc0a27663d1e680cf79f38860589d5',1,'soe::FrameStreamCuda::frame_a_()']]],
   ['frame_5fb_5f',['frame_b_',['../structsoe_1_1_frame_stream.html#ab0c76308823ad7c544ab476fe15346bd',1,'soe::FrameStream::frame_b_()'],['../structsoe_1_1_frame_stream_cuda.html#a4e9a781856a0102453f982269a988ba2',1,'soe::FrameStreamCuda::frame_b_()']]],
   ['frame_5fgpu_5f',['frame_gpu_',['../structsoe_1_1_frame_stream_cuda.html#ac7b054f31f9ff7317c377ac11d60a4d5',1,'soe::FrameStreamCuda']]],

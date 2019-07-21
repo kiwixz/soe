@@ -79,12 +79,14 @@ $(function() {
 <div class="dynheader">
 Collaboration diagram for soe::FrameStreamCuda:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="structsoe_1_1_frame_stream_cuda__coll__graph.svg" width="234" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="structsoe_1_1_frame_stream_cuda__coll__graph.svg" width="480" height="156"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_flow.html">Flow</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_gpu_frame.html">GpuFrame</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_settings.html">Settings</a></td></tr>
@@ -94,8 +96,8 @@ Classes</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9955b567a49f2732f30d6189e597017a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a9955b567a49f2732f30d6189e597017a">FrameStreamCuda</a> ()=default</td></tr>
 <tr class="separator:a9955b567a49f2732f30d6189e597017a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c340a852efb844a90b7057701fee8c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a5c340a852efb844a90b7057701fee8c2">FrameStreamCuda</a> (cv::Size picture_size, double target_fps, <a class="el" href="namespaceutils.html#afc9ff3968fdd2cef5489de6dd7124004">utils::Vec2d</a> scale, <a class="el" href="structsoe_1_1_farneback_settings.html">FarnebackSettings</a> settings)</td></tr>
-<tr class="separator:a5c340a852efb844a90b7057701fee8c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8563f77aec581545601e084a02faa2e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a8563f77aec581545601e084a02faa2e8">FrameStreamCuda</a> (cv::Size picture_size, double target_fps, <a class="el" href="namespaceutils.html#afc9ff3968fdd2cef5489de6dd7124004">utils::Vec2d</a> scale, const <a class="el" href="structsoe_1_1_farneback_settings.html">FarnebackSettings</a> &amp;settings)</td></tr>
+<tr class="separator:a8563f77aec581545601e084a02faa2e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf122e209dcca79c272bea88c760a057"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#adf122e209dcca79c272bea88c760a057">has_output</a> () const</td></tr>
 <tr class="separator:adf122e209dcca79c272bea88c760a057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a095e41a9f5de807a84f333e6d68d5940"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a095e41a9f5de807a84f333e6d68d5940">input_frame</a> (<a class="el" href="structsoe_1_1_frame.html">Frame</a> frame)</td></tr>
@@ -113,16 +115,14 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a7efc0a27663d1e680cf79f38860589d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e9a781856a0102453f982269a988ba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_gpu_frame.html">GpuFrame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a4e9a781856a0102453f982269a988ba2">frame_b_</a></td></tr>
 <tr class="separator:a4e9a781856a0102453f982269a988ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a272e3fc6ddbf079f1458f6f3fee01540"><td class="memItemLeft" align="right" valign="top">cv::Ptr&lt; cv::cuda::FarnebackOpticalFlow &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a272e3fc6ddbf079f1458f6f3fee01540">farneback_</a></td></tr>
-<tr class="separator:a272e3fc6ddbf079f1458f6f3fee01540"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a589c7bbb37394eafb214a43ad3d7c29d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a589c7bbb37394eafb214a43ad3d7c29d">frames_count_</a> = 0</td></tr>
-<tr class="separator:a589c7bbb37394eafb214a43ad3d7c29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90c90807a132a4ffd0fdde0cd39dc803"><td class="memItemLeft" align="right" valign="top">cv::cuda::GpuMat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a90c90807a132a4ffd0fdde0cd39dc803">last_flow_</a></td></tr>
-<tr class="separator:a90c90807a132a4ffd0fdde0cd39dc803"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853fa806a46e1b261a57f84c8b4dce49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_flow.html">Flow</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a853fa806a46e1b261a57f84c8b4dce49">flow_ab_</a></td></tr>
+<tr class="separator:a853fa806a46e1b261a57f84c8b4dce49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f150133ece422e7ad567e01937edbd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_flow.html">Flow</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a1f150133ece422e7ad567e01937edbd4">flow_ba_</a></td></tr>
+<tr class="separator:a1f150133ece422e7ad567e01937edbd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc07705e5b8e1437c6bc305e48bed43f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#adc07705e5b8e1437c6bc305e48bed43f">is_flow_fresh_</a> = false</td></tr>
 <tr class="separator:adc07705e5b8e1437c6bc305e48bed43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fee51e33d3c509f0fbf595e73cc02d4"><td class="memItemLeft" align="right" valign="top">cv::cuda::GpuMat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a6fee51e33d3c509f0fbf595e73cc02d4">last_flow_scaled_</a></td></tr>
-<tr class="separator:a6fee51e33d3c509f0fbf595e73cc02d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a589c7bbb37394eafb214a43ad3d7c29d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a589c7bbb37394eafb214a43ad3d7c29d">frames_count_</a> = 0</td></tr>
+<tr class="separator:a589c7bbb37394eafb214a43ad3d7c29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84ffbaa0225ed442b6c425920f915b40"><td class="memItemLeft" align="right" valign="top">cv::cuda::GpuMat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a84ffbaa0225ed442b6c425920f915b40">x_map_</a></td></tr>
 <tr class="separator:a84ffbaa0225ed442b6c425920f915b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a945694fbc671c58daa01b67367823e31"><td class="memItemLeft" align="right" valign="top">cv::cuda::GpuMat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsoe_1_1_frame_stream_cuda.html#a945694fbc671c58daa01b67367823e31">y_map_</a></td></tr>
@@ -159,8 +159,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5c340a852efb844a90b7057701fee8c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c340a852efb844a90b7057701fee8c2">&#9670;&nbsp;</a></span>FrameStreamCuda() <span class="overload">[2/2]</span></h2>
+<a id="a8563f77aec581545601e084a02faa2e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8563f77aec581545601e084a02faa2e8">&#9670;&nbsp;</a></span>FrameStreamCuda() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +186,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structsoe_1_1_farneback_settings.html">FarnebackSettings</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structsoe_1_1_farneback_settings.html">FarnebackSettings</a> &amp;&#160;</td>
           <td class="paramname"><em>settings</em>&#160;</td>
         </tr>
         <tr>
@@ -197,7 +197,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00025">25</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00026">26</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -217,7 +217,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00048">48</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00038">38</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,7 +237,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00057">57</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00047">47</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -256,7 +256,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00068">68</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8cpp_source.html#l00058">58</a> of file <a class="el" href="frame__stream__cuda_8cpp_source.html">frame_stream_cuda.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -287,12 +287,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00038">38</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00050">50</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
-<a id="a272e3fc6ddbf079f1458f6f3fee01540"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a272e3fc6ddbf079f1458f6f3fee01540">&#9670;&nbsp;</a></span>farneback_</h2>
+<a id="a853fa806a46e1b261a57f84c8b4dce49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a853fa806a46e1b261a57f84c8b4dce49">&#9670;&nbsp;</a></span>flow_ab_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,7 +301,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">cv::Ptr&lt;cv::cuda::FarnebackOpticalFlow&gt; soe::FrameStreamCuda::farneback_</td>
+          <td class="memname"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_flow.html">Flow</a> soe::FrameStreamCuda::flow_ab_</td>
         </tr>
       </table>
   </td>
@@ -311,7 +311,31 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00041">41</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00053">53</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+
+</div>
+</div>
+<a id="a1f150133ece422e7ad567e01937edbd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f150133ece422e7ad567e01937edbd4">&#9670;&nbsp;</a></span>flow_ba_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsoe_1_1_frame_stream_cuda_1_1_flow.html">Flow</a> soe::FrameStreamCuda::flow_ba_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00054">54</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -335,7 +359,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00039">39</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00051">51</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -359,7 +383,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00040">40</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00052">52</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -383,7 +407,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00051">51</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00061">61</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +431,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00042">42</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00056">56</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -431,55 +455,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00045">45</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
-
-</div>
-</div>
-<a id="a90c90807a132a4ffd0fdde0cd39dc803"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90c90807a132a4ffd0fdde0cd39dc803">&#9670;&nbsp;</a></span>last_flow_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">cv::cuda::GpuMat soe::FrameStreamCuda::last_flow_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00044">44</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
-
-</div>
-</div>
-<a id="a6fee51e33d3c509f0fbf595e73cc02d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fee51e33d3c509f0fbf595e73cc02d4">&#9670;&nbsp;</a></span>last_flow_scaled_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">cv::cuda::GpuMat soe::FrameStreamCuda::last_flow_scaled_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00048">48</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00055">55</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -503,7 +479,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00036">36</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00048">48</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -527,7 +503,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00049">49</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00059">59</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -551,7 +527,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00050">50</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__stream__cuda_8h_source.html#l00060">60</a> of file <a class="el" href="frame__stream__cuda_8h_source.html">frame_stream_cuda.h</a>.</p>
 
 </div>
 </div>
@@ -562,7 +538,7 @@ Here is the call graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 21 2019 11:46:38 for soe by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 21 2019 12:29:44 for soe by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>
