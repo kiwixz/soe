@@ -34,6 +34,7 @@ private:
     };
 
     struct Flow {
+        Flow() = default;
         Flow(cv::Size picture_size, utils::Vec2d scale, const FarnebackSettings& settings);
 
         cv::Ptr<cv::cuda::FarnebackOpticalFlow> farneback;
