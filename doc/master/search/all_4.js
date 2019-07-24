@@ -6,7 +6,7 @@ var searchData=
   ['farnebacksettings',['FarnebackSettings',['../structsoe_1_1_farneback_settings.html',1,'soe']]],
   ['fast_5fpyramids',['fast_pyramids',['../structsoe_1_1_farneback_settings.html#a3c24827175c647814ff739159bc28b9a',1,'soe::FarnebackSettings']]],
   ['flags',['flags',['../structsoe_1_1_farneback_settings.html#a214130d89fe3024128364d8a2f0d8b8f',1,'soe::FarnebackSettings']]],
-  ['flow',['Flow',['../structsoe_1_1_frame_stream_cuda_1_1_flow.html',1,'soe::FrameStreamCuda::Flow'],['../structsoe_1_1_frame_stream_cuda_1_1_flow.html#adbd1d96b93e5b2c0d1a1a6b944286c3a',1,'soe::FrameStreamCuda::Flow::Flow()']]],
+  ['flow',['Flow',['../structsoe_1_1_frame_stream_cuda_1_1_flow.html',1,'soe::FrameStreamCuda::Flow'],['../structsoe_1_1_frame_stream_cuda_1_1_flow.html#a4e4689a209f956c526dd405d4800cca1',1,'soe::FrameStreamCuda::Flow::Flow()=default'],['../structsoe_1_1_frame_stream_cuda_1_1_flow.html#adbd1d96b93e5b2c0d1a1a6b944286c3a',1,'soe::FrameStreamCuda::Flow::Flow(cv::Size picture_size, utils::Vec2d scale, const FarnebackSettings &amp;settings)']]],
   ['flow_5fab_5f',['flow_ab_',['../structsoe_1_1_frame_stream_cuda.html#a853fa806a46e1b261a57f84c8b4dce49',1,'soe::FrameStreamCuda']]],
   ['flow_5fba_5f',['flow_ba_',['../structsoe_1_1_frame_stream_cuda.html#a1f150133ece422e7ad567e01937edbd4',1,'soe::FrameStreamCuda']]],
   ['flow_5fto_5fmap',['flow_to_map',['../namespacesoe_1_1cuda.html#abd5685966ea7bec06aae6744b87aebb3',1,'soe::cuda']]],
