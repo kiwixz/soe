@@ -3,7 +3,7 @@
 
 namespace utils::test {
 
-#ifndef _WIN32  // would compile with previous MSVC (19.21), but not anymore
+#ifndef _WIN32  // would compile with previous MSVC (19.21), but not with current version
 TEST_SUITE("bind_front")
 {
     TEST_CASE("simple")
@@ -26,7 +26,7 @@ TEST_SUITE("bind_front")
         CHECK(ref(a) == 4);
         CHECK(bind_front(ref)(a) == 4);
         decltype(auto) b = bind_front(ref)(a);
-        bind_front(ref)(a) = 5;
+        bind_front(ref)(b) = 5;
         CHECK(bind_front(ref, a)() == 5);
     }
 }
